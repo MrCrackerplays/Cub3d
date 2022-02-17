@@ -6,7 +6,10 @@ MINILIBX_FILE ?= $(MINILIBX_FOLDER)/mlx42.a
 LIBFT_FOLDER ?= libft
 LIBFT_FILE ?= $(LIBFT_FOLDER)/libft.a
 
-OBJECTS := cub3d.o map/map.o
+OBJECTS := \
+	mlx/mlx.o \
+	mlx/color.o \
+	mlx/color_info.o
 OBJECTS := $(addprefix obj/,$(OBJECTS))
 HEADER_FILES := map.h
 HEADER_FILES := $(addprefix include/,$(HEADER_FILES))
@@ -30,7 +33,7 @@ $(NAME): $(MINILIBX_FILE) $(LIBFT_FILE) $(OBJECTS)
 
 obj/%.o: src/%.c $(HEADER_FILES)
 	@/bin/echo -n "[$(NAME)] compiling $@... "
-	@mkdir -p obj obj/map
+	@mkdir -p obj obj/map obj/mlx
 	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJ_FLAGS) -c $< -o $@
 	@echo "[OK]"
 
