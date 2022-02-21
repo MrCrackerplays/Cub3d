@@ -1,7 +1,7 @@
 NAME := cub3d
 
 MINILIBX_FOLDER ?= MLX42
-MINILIBX_FILE ?= $(MINILIBX_FOLDER)/mlx42.a
+MINILIBX_FILE ?= $(MINILIBX_FOLDER)/libmlx42.a
 
 LIBFT_FOLDER ?= libft
 LIBFT_FILE ?= $(LIBFT_FOLDER)/libft.a
@@ -68,7 +68,11 @@ run: all
 	@echo "[$(NAME)] running $(NAME)"
 	./$(NAME) maps/example.cub
 
+runl:
+	gcc src/mlx/* MLX42/libmlx42.a libft/libft.a -I include -I libft/include \
+	-I MLX42/include -ldl -lglfw -lm && ./a.out && rm a.out
+
 debug:
 	$(MAKE) DEBUG=1
 
-.PHONY: all clean fclean re bonus run debug
+.PHONY: all clean fclean re bonus run debug runl
