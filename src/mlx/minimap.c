@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:55:48 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/21 22:36:30 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/22 13:36:09 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	static_draw_walls(t_data *data)
 		while (x < line->len)
 		{
 			if (line->text[x] == '1')
-				ml_draw_box(data->screen,
+				ml_draw_box(data->minimap,
 					(t_iv){x * data->map_s + data->map_pos.x,
 					y * data->map_s + data->map_pos.y},
 					(t_iv){data->map_s, data->map_s},
@@ -43,23 +43,23 @@ void	minimap_hook(void *param)
 	size_t			i;
 
 	i = 0;
-	while (i < data->screen->width * data->screen->height)
+	while (i < data->minimap->width * data->minimap->height)
 	{
-		mlx_putpixel(data->screen, i, 0, 127);
+		mlx_putpixel(data->minimap, i, 0, 64);
 		i++;
 	}
 	static_draw_walls(data);
 	i = 0;
 	while (i < WIDTH)
 	{
-		ml_draw_line(data->screen,
+		ml_draw_line(data->minimap,
 			(t_iv){
 			data->player_pos.x * data->map_s + data->map_pos.x,
 			data->player_pos.y * data->map_s + data->map_pos.y},
 			(t_iv){
 			data->rays[i].hit_pos.x * data->map_s + data->map_pos.x,
 			data->rays[i].hit_pos.y * data->map_s + data->map_pos.y},
-			0xFFFFFFFF);
+			0xFFFFFF80);
 		i += data->ray_skip;
 	}
 }

@@ -6,31 +6,37 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 20:39:44 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/21 22:35:04 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/22 13:56:04 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-char	map_get_at(t_ft_list *map, UINT x, UINT y)
+static t_ray	static_ray_with_face_hit(t_ray ray, t_iv dir, char func)
 {
-	t_ft_string	*line;
-
-	if (x < 0 || y < 0)
-		return ('\0');
-	if (y >= map->len)
-		return ('\0');
-	line = ft_list_item_at(map, y);
-	if (x >= line->len)
-		return ('\0');
-	return (line->text[x]);
-}
-
-static int	static_corect(int n)
-{
-	if (n < 0)
-		return (n + 1);
-	return (n);
+	if (func == 'x')
+	{
+		if (dir.x == 1)
+			ray.wall_face = 'e';
+		else
+			ray.wall_face = 'w';
+		if (dir.x == 1)
+			ray.pos_on_wall = ray.hit_pos.y - (int)ray.hit_pos.y;
+		else
+			ray.pos_on_wall = 1 - (ray.hit_pos.y - (int)ray.hit_pos.y);
+	}
+	else
+	{
+		if (dir.y == 1)
+			ray.wall_face = 's';
+		else
+			ray.wall_face = 'n';
+		if (dir.y == 1)
+			ray.pos_on_wall = 1 - (ray.hit_pos.x - (int)ray.hit_pos.x);
+		else
+			ray.pos_on_wall = ray.hit_pos.x - (int)ray.hit_pos.x;
+	}
+	return (ray);
 }
 
 static t_ray
@@ -44,7 +50,7 @@ static t_ray
 	cor = 0;
 	if (dir.x == -1)
 		cor = 1;
-	ray.hit_pos.x = (int)data->player_pos.x + static_corect(dir.x);
+	ray.hit_pos.x = (int)data->player_pos.x + dir.x + cor;
 	ray.hit_pos.y = (float)(data->player_pos.x - (int)data->player_pos.x);
 	if (dir.x == 1)
 		ray.hit_pos.y = (1 - ray.hit_pos.y);
@@ -59,7 +65,7 @@ static t_ray
 	}
 	ray.len = sqrtf(powf(data->player_pos.x - ray.hit_pos.x, 2)
 			+ powf(data->player_pos.y - ray.hit_pos.y, 2));
-	return (ray);
+	return (static_ray_with_face_hit(ray, dir, 'x'));
 }
 
 static t_ray
@@ -74,7 +80,7 @@ static t_ray
 	if (dir.y == -1)
 		cor = 1;
 	ray.hit_pos = (t_fv){0, 0};
-	ray.hit_pos.y = (int)data->player_pos.y + static_corect(dir.y);
+	ray.hit_pos.y = (int)data->player_pos.y + dir.y + cor;
 	ray.hit_pos.x = data->player_pos.y - (int)data->player_pos.y;
 	if (dir.y == 1)
 		ray.hit_pos.x = 1 - ray.hit_pos.x;
@@ -89,13 +95,13 @@ static t_ray
 	}
 	ray.len = sqrtf(powf(data->player_pos.x - ray.hit_pos.x, 2)
 			+ powf(data->player_pos.y - ray.hit_pos.y, 2));
-	return (ray);
+	return (static_ray_with_face_hit(ray, dir, 'y'));
 }
 
 t_ray	cast_ray(t_data *data, float r_angle)
 {
-	t_ray		rays[2];
-	t_iv		dir;
+	t_ray				rays[2];
+	t_iv				dir;
 
 	if (r_angle < M_PI)
 		dir.y = 1;
@@ -108,9 +114,9 @@ t_ray	cast_ray(t_data *data, float r_angle)
 		dir.x = -1;
 	rays[0] = static_ray_x(data, r_angle, dir);
 	rays[1] = static_ray_y(data, r_angle + M_PI_2, dir);
-	if (rays[0].len < rays[1].len)
-		return (rays[0]);
-	return (rays[1]);
+	if (rays[0].len > rays[1].len)
+		rays[0] = rays[1];
+	return (rays[0]);
 }
 
 void	ray_cast_hook(void *param)

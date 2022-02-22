@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 17:04:57 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/21 22:17:49 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/22 13:22:25 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ml_draw_line(t_mlx_image *image, t_iv p1, t_iv p2, COLOR color)
 {
 	const float	xlen = p2.x - p1.x;
 	const float	ylen = p2.y - p1.y;
-	const float	target = fmax(abs(xlen), abs(ylen));
+	const float	target = fmax(fabsf(xlen), fabsf(ylen));
 	float		i;
 
 	if (target > WIDTH * HEIGHT)

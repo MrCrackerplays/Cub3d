@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_pixel.c                                       :+:    :+:            */
+/*   ft_is.h                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
+/*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/21 19:29:36 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 14:06:31 by rdrazsky      ########   odam.nl         */
+/*   Created: 2022/02/22 13:56:54 by rdrazsky      #+#    #+#                 */
+/*   Updated: 2022/02/22 13:59:25 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#ifndef FT_IS_H
+# define FT_IS_H
 
-void	ml_draw_pixel(t_mlx_image *img, int x, int y, COLOR color)
-{
-	if (x < 0 || y < 0 || x > img->width * img->height || y > img->height)
-		return ;
-	mlx_putpixel(img, x, y, color);
-}
+int	ft_isalpha(int c);
+int	ft_isdigit(int c);
+int	ft_isalnum(int c);
+int	ft_isprint(int c);
+int	ft_isascii(int c);
+int	ft_isspace(int c);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/21 21:02:52 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/22 13:37:42 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_ray {
 typedef struct s_data {
 	t_mlx		*mlx;
 	t_mlx_image	*screen;
+	t_mlx_image	*minimap;
 	t_ft_list	*map;
 	t_fv		player_pos;
 	float		player_angle;
@@ -73,5 +74,7 @@ double	ml_tan(double degree);
 void	player_movement_hook(void *param);
 void	ray_cast_hook(void *param);
 void	minimap_hook(void *param);
+
+char	map_get_at(t_ft_list *map, UINT x, UINT y);
 
 #endif

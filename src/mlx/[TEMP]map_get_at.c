@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_pixel.c                                       :+:    :+:            */
+/*   [TEMP]map_get_at.c                                 :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
+/*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/21 19:29:36 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 14:06:31 by rdrazsky      ########   odam.nl         */
+/*   Created: 2022/02/22 13:37:12 by rdrazsky      #+#    #+#                 */
+/*   Updated: 2022/02/22 13:37:14 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	ml_draw_pixel(t_mlx_image *img, int x, int y, COLOR color)
+/* TO BE DELETED */
+char	map_get_at(t_ft_list *map, UINT x, UINT y)
 {
-	if (x < 0 || y < 0 || x > img->width * img->height || y > img->height)
-		return ;
-	mlx_putpixel(img, x, y, color);
+	t_ft_string	*line;
+
+	if (x < 0 || y < 0)
+		return ('\0');
+	if (y >= map->len)
+		return ('\0');
+	line = ft_list_item_at(map, y);
+	if (x >= line->len)
+		return ('\0');
+	return (line->text[x]);
 }
