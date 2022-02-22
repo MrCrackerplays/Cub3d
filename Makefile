@@ -79,4 +79,7 @@ runl: $(MINILIBX_FILE) $(LIBFT_FILE)
 debug:
 	$(MAKE) DEBUG=1
 
+pull:
+	git pull --recurse-submodules
+
 .PHONY: all clean fclean re bonus run debug runl runm
