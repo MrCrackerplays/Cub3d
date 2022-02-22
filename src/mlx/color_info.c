@@ -6,17 +6,15 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/09 17:44:24 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/17 16:13:59 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/22 15:18:32 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-//return (a << 24 | g << 16 | b << 8 | r);
-
 BYTE	ml_color_r(UINT rgba)
 {
-	return (rgba);
+	return (rgba >> 24);
 }
 
 BYTE	ml_color_g(UINT rgba)
@@ -31,5 +29,5 @@ BYTE	ml_color_b(UINT rgba)
 
 BYTE	ml_color_a(UINT rgba)
 {
-	return (rgba >> 24);
+	return (rgba);
 }

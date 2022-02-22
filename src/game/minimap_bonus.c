@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minimap.c                                          :+:    :+:            */
+/*   minimap_bonus.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:55:48 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 13:36:09 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/22 17:38:28 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,38 @@
 static void	static_draw_walls(t_data *data)
 {
 	t_ft_string	*line;
-	int			x;
-	int			y;
+	t_iv		cor;
 
-	y = 0;
-	while (y < data->map->len)
+	cor.y = 0;
+	while (cor.y < data->map->len)
 	{
-		line = ft_list_item_at(data->map, y);
-		x = 0;
-		while (x < line->len)
+		line = ft_list_item_at(data->map, cor.y);
+		cor.x = 0;
+		while (cor.x < line->len)
 		{
-			if (line->text[x] == '1')
+			if (line->text[cor.x] == '1')
 				ml_draw_box(data->minimap,
-					(t_iv){x * data->map_s + data->map_pos.x,
-					y * data->map_s + data->map_pos.y},
-					(t_iv){data->map_s, data->map_s},
-					0xFFFFFF40);
-			x++;
+					(t_iv){cor.x * data->map_s + data->map_pos.x,
+					cor.y * data->map_s + data->map_pos.y},
+					(t_iv){data->map_s, data->map_s}, 0x00000080);
+			else if (line->text[cor.x] == 'D')
+				ml_draw_box(data->minimap,
+					(t_iv){cor.x * data->map_s + data->map_pos.x,
+					cor.y * data->map_s + data->map_pos.y},
+					(t_iv){data->map_s, data->map_s}, 0xFF800080);
+			else if (line->text[cor.x] == 'O')
+				ml_draw_box(data->minimap,
+					(t_iv){cor.x * data->map_s + data->map_pos.x,
+					cor.y * data->map_s + data->map_pos.y},
+					(t_iv){data->map_s, data->map_s}, 0x80400080);
+			else if (line->text[cor.x] != '0')
+				ml_draw_box(data->minimap,
+					(t_iv){cor.x * data->map_s + data->map_pos.x,
+					cor.y * data->map_s + data->map_pos.y},
+					(t_iv){data->map_s, data->map_s}, 0x00FFFF80);
+			cor.x++;
 		}
-		y++;
+		cor.y++;
 	}
 }
 
@@ -45,10 +58,9 @@ void	minimap_hook(void *param)
 	i = 0;
 	while (i < data->minimap->width * data->minimap->height)
 	{
-		mlx_putpixel(data->minimap, i, 0, 64);
+		mlx_putpixel(data->minimap, i, 0, 0);
 		i++;
 	}
-	static_draw_walls(data);
 	i = 0;
 	while (i < WIDTH)
 	{
@@ -62,4 +74,5 @@ void	minimap_hook(void *param)
 			0xFFFFFF80);
 		i += data->ray_skip;
 	}
+	static_draw_walls(data);
 }

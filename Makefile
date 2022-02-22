@@ -69,12 +69,12 @@ run: all
 	./$(NAME) maps/example.cub
 
 runm: $(MINILIBX_FILE) $(LIBFT_FILE)
-	gcc src/mlx/* MLX42/libmlx42.a libft/libft.a -I include -I libft/include \
-	-I MLX42/include $(MLX_FLAGS) -lm && ./a.out && rm a.out
+	gcc src/game/* src/utils/* src/mlx/* MLX42/libmlx42.a libft/libft.a -I include -I \
+	libft/include -I MLX42/include $(MLX_FLAGS) -lm && ./a.out && rm a.out
 
 runl: $(MINILIBX_FILE) $(LIBFT_FILE)
-	gcc src/mlx/* MLX42/libmlx42.a libft/libft.a -I include -I libft/include \
-	-I MLX42/include -ldl -lglfw -lm && ./a.out && rm a.out
+	gcc src/game/* src/utils/* src/mlx/* MLX42/libmlx42.a libft/libft.a -I include -I \
+	libft/include -I MLX42/include -ldl -lglfw -lm && ./a.out && rm a.out
 
 debug:
 	$(MAKE) DEBUG=1

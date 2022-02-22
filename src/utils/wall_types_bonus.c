@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   map.h                                              :+:    :+:            */
+/*   wall_types_bonus.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/17 13:10:15 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/17 13:33:32 by rdrazsky      ########   odam.nl         */
+/*   Created: 2022/02/22 17:20:18 by rdrazsky      #+#    #+#                 */
+/*   Updated: 2022/02/22 17:24:45 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include <cub3d.h>
 
-# include <libft.h>
-
-typedef struct s_map{
-	t_ft_list	*lines;
-}	t_map;
-
-#endif
+bool	is_wall(char c)
+{
+	if (c == '1' || c == 'D')
+		return (true);
+	return (false);
+}

@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_pixel.c                                       :+:    :+:            */
+/*   find_angle.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
+/*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/02/21 19:29:36 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 15:16:38 by rdrazsky      ########   odam.nl         */
+/*   Created: 2022/02/22 16:26:50 by rdrazsky      #+#    #+#                 */
+/*   Updated: 2022/02/22 17:19:43 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	ml_draw_pixel(t_mlx_image *img, int x, int y, COLOR color)
+// angle = atanf(move_vec.y / move_vec.x) + data->player_angle;
+// if (move_vec.x < 0)
+// 	angle += M_PI;
+
+float	find_angle(t_fv p1, t_fv p2)
 {
-	if (ml_color_a(color) == 0
-		|| x < 0 || y < 0 || x > img->width || y > img->height)
-		return ;
-	mlx_putpixel(img, x, y, color);
+	float	angle;
+
+	angle = atanf((p2.y - p1.y) / (p2.x - p1.x));
+	if (p2.x - p1.x < 0)
+		angle += M_PI;
+	return (angle);
 }
