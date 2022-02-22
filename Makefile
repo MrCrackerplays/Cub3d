@@ -79,7 +79,8 @@ runl: $(MINILIBX_FILE) $(LIBFT_FILE)
 debug:
 	$(MAKE) DEBUG=1
 
-pull:
-	git pull --recurse-submodules
+pull-submodules:
+	git submodule init
+	git submodule update
 
-.PHONY: all clean fclean re bonus run debug runl runm
+.PHONY: all clean fclean re bonus run debug runl runm pull-submodules
