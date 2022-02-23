@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 14:57:00 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 17:41:42 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/23 18:35:31 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_minimap(t_data *data)
 {
-	data->minimap = mlx_new_image(data->mlx, WIDTH / 2, HEIGHT / 2);
+	data->minimap = mlx_new_image(data->mlx, WIDTH / 4, HEIGHT / 4);
 	data->map_pos = (t_fv){0, 0};
 	data->map_s = fmin(
 			data->minimap->width / ((t_ft_string *)data->map->first->item)->len,

@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/23 14:31:47 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/02/23 18:14:17 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_ivector {
 
 typedef struct s_ray {
 	t_fv	hit_pos;
+	t_iv	hit_wall_pos;
 	float	len;
 	char	wall_face;
 	float	pos_on_wall;
@@ -89,6 +90,6 @@ void	minimap_hook(void *param);
 
 char	map_get_at(t_ft_list *map, UINT x, UINT y);
 
-bool	is_wall(char c);
+char	is_wall(char c);
 
 #endif

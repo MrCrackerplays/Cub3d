@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:18:03 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 17:44:27 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/23 18:33:18 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static void	static_player_door(t_data *const data)
 	t_fv			move_vec;
 	static bool		last;
 
-	if (!mlx_is_key_down(data->mlx, MLX_KEY_E) || last)
+	if (!mlx_is_key_down(data->mlx, MLX_KEY_E) || last
+		|| map_get_at(data->map, data->player_pos.x, data->player_pos.y) == 'O')
 	{
 		last = mlx_is_key_down(data->mlx, MLX_KEY_E);
 		return ;
@@ -59,10 +60,12 @@ static void	static_player_door(t_data *const data)
 	move_vec.x = data->player_pos.x + cosf(data->player_angle);
 	move_vec.y = data->player_pos.y + sinf(data->player_angle);
 	if (map_get_at(data->map, move_vec.x, move_vec.y) == 'D')
-		((t_ft_string *)ft_list_item_at(data->map, move_vec.y))->text[(int)move_vec.x]
+		((t_ft_string *)ft_list_item_at(
+				data->map, move_vec.y))->text[(int)move_vec.x]
 			= 'O';
 	else if (map_get_at(data->map, move_vec.x, move_vec.y) == 'O')
-		((t_ft_string *)ft_list_item_at(data->map, move_vec.y))->text[(int)move_vec.x]
+		((t_ft_string *)ft_list_item_at(
+				data->map, move_vec.y))->text[(int)move_vec.x]
 			= 'D';
 	last = mlx_is_key_down(data->mlx, MLX_KEY_E);
 }
