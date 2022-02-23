@@ -12,7 +12,9 @@ OBJECTS := \
 	# mlx/mlx.o \
 	# mlx/color_info.o
 OBJECTS := $(addprefix obj/,$(OBJECTS))
-HEADER_FILES := map.h
+OBJECT_DIRS := map mlx
+OBJECT_DIRS := := $(addprefix obj/,$(OBJECT_DIRS))
+HEADER_FILES := cub3d.h
 HEADER_FILES := $(addprefix include/,$(HEADER_FILES))
 INCLUDE := include libft/include $(MINILIBX_FOLDER)/include/MLX42
 INCLUDE := $(addprefix -I,$(INCLUDE))
@@ -34,11 +36,19 @@ $(NAME): $(MINILIBX_FILE) $(LIBFT_FILE) $(OBJECTS)
 
 obj/%.o: src/%.c $(HEADER_FILES)
 	@/bin/echo -n "[$(NAME)] compiling $@... "
-	@mkdir -p obj obj/map obj/mlx
+	@mkdir -p $(OBJECT_DIRS)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJ_FLAGS) -c $< -o $@
 	@echo "[OK]"
 
-$(MINILIBX_FILE):
+$(MINILIBX_FOLDER)/Makefile:
+	@echo "[$(NAME)] MLX42 not detected, cloning MLX42"
+	git clone https://github.com/W2Codam/MLX42.git $(MINILIBX_FOLDER)
+
+$(MINILIBX_FILE): $(MINILIBX_FOLDER)/Makefile
+	@echo "[$(NAME)] pulling MLX42 updates"
+	cd $(MINILIBX_FOLDER)
+	git pull
+	cd ..
 	@echo "[$(NAME)] compiling MLX42"
 	$(MAKE) -C ./$(MINILIBX_FOLDER)
 	@echo "[$(NAME)] finished compiling MLX42"
