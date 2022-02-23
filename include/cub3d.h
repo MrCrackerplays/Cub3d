@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 17:47:27 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/23 14:31:47 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@
 # define ROT_SPEED .05
 # define WIDTH 1280
 # define HEIGHT 720
-
-typedef struct s_map{
-	t_ft_list	*lines;
-}	t_map;
 
 typedef struct s_fvector {
 	float	x;
