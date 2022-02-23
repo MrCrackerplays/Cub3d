@@ -6,7 +6,7 @@
 #    By: rdrazsky <rdrazsky@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/04 13:52:48 by rdrazsky      #+#    #+#                  #
-#    Updated: 2022/02/13 18:11:21 by rdrazsky      ########   odam.nl          #
+#    Updated: 2022/02/23 15:17:22 by pdruart       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,12 @@ FILES = \
 	source/print/formated \
 	source/print/c \
 	source/int/int_limits \
+	source/is/isalnum \
+	source/is/isdigit \
+	source/is/isalpha \
+	source/is/isascii \
+	source/is/isprint \
+	source/is/isspace \
 	source/exit/exit_error \
 	source/cstring/strcpy \
 	source/cstring/strdup \
