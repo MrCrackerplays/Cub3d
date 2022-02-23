@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 18:31:40 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/13 18:23:44 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/23 15:59:35 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ char	*ft_strdup(char *src);
 char	*ft_strcat(char *des, char *src);
 char	*ft_strcpy(char *des, char *src);
 char	*ft_strncpy(char *des, const char *src, size_t n);
+
+char	*ft_strstr(char *big, char *little);
+char	*ft_strnstr(char *big, char *little, size_t len);
 
 int		ft_strcmp(char *src1, char *src2);
 

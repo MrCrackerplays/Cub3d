@@ -6,7 +6,7 @@
 #    By: rdrazsky <rdrazsky@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/04 13:52:48 by rdrazsky      #+#    #+#                  #
-#    Updated: 2022/02/23 15:17:22 by pdruart       ########   odam.nl          #
+#    Updated: 2022/02/23 15:58:27 by rdrazsky      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,8 @@ FILES = \
 	source/cstring/strdup \
 	source/cstring/strcmp \
 	source/cstring/strlen \
-	source/cstring/atoi
+	source/cstring/atoi \
+	source/cstring/strstr
 
 SRC = $(foreach i, $(FILES), $(i).c)
 OBJ = $(foreach i, $(FILES), $(i).o)
