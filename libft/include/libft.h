@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/16 17:30:50 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/13 17:52:51 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/23 14:34:30 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <ft_memory.h>
 # include <ft_int_types.h>
 # include <ft_int_limits.h>
+# include <ft_is.h>
 # include <ft_math.h>
 # include <ft_cstring.h>
 # include <ft_string.h>
