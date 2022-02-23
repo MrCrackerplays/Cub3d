@@ -7,9 +7,10 @@ LIBFT_FOLDER ?= libft
 LIBFT_FILE ?= $(LIBFT_FOLDER)/libft.a
 
 OBJECTS := \
-	mlx/mlx.o \
-	mlx/color.o \
-	mlx/color_info.o
+	map/map.o \
+	mlx/color.o 
+	# mlx/mlx.o \
+	# mlx/color_info.o
 OBJECTS := $(addprefix obj/,$(OBJECTS))
 HEADER_FILES := map.h
 HEADER_FILES := $(addprefix include/,$(HEADER_FILES))
@@ -79,8 +80,4 @@ runl: $(MINILIBX_FILE) $(LIBFT_FILE)
 debug:
 	$(MAKE) DEBUG=1
 
-pull-submodules:
-	git submodule init
-	git submodule update
-
-.PHONY: all clean fclean re bonus run debug runl runm pull-submodules
+.PHONY: all clean fclean re bonus run debug runl runm
