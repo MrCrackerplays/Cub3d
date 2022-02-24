@@ -29,7 +29,7 @@ OBJECT_DIRS := map mlx utils game
 OBJECT_DIRS := $(addprefix obj/,$(OBJECT_DIRS))
 HEADER_FILES := cub3d.h
 HEADER_FILES := $(addprefix include/,$(HEADER_FILES))
-INCLUDE := include libft/include $(MINILIBX_FOLDER)/include/MLX42
+INCLUDE := include libft/include $(MINILIBX_FOLDER)/include
 INCLUDE := $(addprefix -I,$(INCLUDE))
 
 CFLAGS ?= -Wall -Werror -Wextra
@@ -44,14 +44,14 @@ OS := $(shell uname)
 ifeq ($(OS),Darwin)
 MLX_FLAGS := -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 else
-MLX_FLAGS := -ldl -lglfw
+MLX_FLAGS := -ldl -lglfw -lm
 endif
 
 all: $(NAME)
 
 $(NAME): $(MINILIBX_FILE) $(LIBFT_FILE) $(OBJECTS)
 	@/bin/echo -n "[$(NAME)] compiling $(NAME)... "
-	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FILE) $(MINILIBX_FILE) -o $(NAME) $(MLX_FLAGS)
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FILE) $(MINILIBX_FILE) -o $(NAME) $(MLX_FLAGS)
 	@echo "[OK]"
 
 obj/%.o: src/%.c $(HEADER_FILES)
@@ -101,5 +101,10 @@ run: all
 
 debug:
 	$(MAKE) DEBUG=1
+
+runl: $(MINILIBX_FILE) $(LIBFT_FILE)
+	gcc \
+		src/game/* src/map/* src/mlx/* src/utils/* \
+		libft/libft.a MLX42/libmlx42.a -ldl -lglfw -lm -I include -I libft/include -I MLX42/include
 
 .PHONY: all clean fclean re bonus run debug
