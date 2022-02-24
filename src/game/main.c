@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:34:12 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/24 16:10:20 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/02/24 19:12:45 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	static_main_hook(void *param)
 {
 	t_data *const	data = param;
-	int				i;
+	UINT			i;
 
 	i = 0;
 	while (i < data->screen->width * data->screen->height / 2)
@@ -32,13 +32,18 @@ static void	static_main_hook(void *param)
 		mlx_close_window(data->mlx);
 }
 
-int32_t	main(void)
+int32_t	main(int argc, char **argv)
 {
 	t_data	data;
 
+	if (argc < 2)
+		ft_exit_error("No map given.");
+	if (argc > 2)
+		ft_exit_error("Too many arguments.");
 	data.mlx = mlx_init(WIDTH, HEIGHT, "cub3d", true);
 	if (!data.mlx)
 		exit(EXIT_FAILURE);
+	import_map(argv[1], &data);
 	init_game(&data);
 	mlx_image_to_window(data.mlx, data.screen, 0, 0);
 	mlx_image_to_window(data.mlx, data.minimap, 0, 0);

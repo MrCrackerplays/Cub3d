@@ -7,13 +7,26 @@ LIBFT_FOLDER ?= libft
 LIBFT_FILE ?= $(LIBFT_FOLDER)/libft.a
 
 OBJECTS := \
-	map/map.o \
-	mlx/color.o 
-	# mlx/mlx.o \
-	# mlx/color_info.o
+	game/init.o \
+	game/main.o \
+	game/map_rendering.o \
+	game/minimap_bonus.o \
+	game/player.o \
+	game/ray_casting.o \
+	mlx/color.o \
+	mlx/color_info.o \
+	mlx/draw_box.o \
+	mlx/draw_line.o \
+	mlx/draw_pixel.o \
+	utils/find_angle.o \
+	utils/wall_types_bonus.o \
+	map/get_at.o \
+	map/format.o \
+	map/import.o \
+	map/validate.o
 OBJECTS := $(addprefix obj/,$(OBJECTS))
-OBJECT_DIRS := map mlx
-OBJECT_DIRS := := $(addprefix obj/,$(OBJECT_DIRS))
+OBJECT_DIRS := map mlx utils game
+OBJECT_DIRS := $(addprefix obj/,$(OBJECT_DIRS))
 HEADER_FILES := cub3d.h
 HEADER_FILES := $(addprefix include/,$(HEADER_FILES))
 INCLUDE := include libft/include $(MINILIBX_FOLDER)/include/MLX42
@@ -24,8 +37,15 @@ ifdef DEBUG
 CFLAGS := -g $(CFLAGS)
 endif
 
-MLX_FLAGS := -L$(MINILIBX_FOLDER) -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 OBJ_FLAGS := -O3
+
+# This should allow compilation on linux (no windows support)
+OS := $(shell uname)
+ifeq ($(OS),Darwin)
+MLX_FLAGS := -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
+else
+MLX_FLAGS := -ldl -lglfw
+endif
 
 all: $(NAME)
 
@@ -77,17 +97,9 @@ bonus: all
 
 run: all
 	@echo "[$(NAME)] running $(NAME)"
-	./$(NAME) maps/example.cub
-
-runm: $(MINILIBX_FILE) $(LIBFT_FILE)
-	gcc src/game/* src/utils/* src/mlx/* MLX42/libmlx42.a libft/libft.a -I include -I \
-	libft/include -I MLX42/include $(MLX_FLAGS) -lm && ./a.out && rm a.out
-
-runl: $(MINILIBX_FILE) $(LIBFT_FILE)
-	gcc src/game/* src/utils/* src/mlx/* MLX42/libmlx42.a libft/libft.a -I include -I \
-	libft/include -I MLX42/include -ldl -lglfw -lm && ./a.out && rm a.out
+	./$(NAME) maps/simple.cub
 
 debug:
 	$(MAKE) DEBUG=1
 
-.PHONY: all clean fclean re bonus run debug runl runm
+.PHONY: all clean fclean re bonus run debug

@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/24 16:09:54 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/02/24 18:28:18 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,17 @@ BYTE	ml_color_g(COLOR rgba);
 BYTE	ml_color_b(COLOR rgba);
 BYTE	ml_color_a(COLOR rgba);
 
-void	ml_draw_pixel(t_mlx_image *img, int x, int y, COLOR color);
+void	ml_draw_pixel(t_mlx_image *img, UINT x, UINT y, COLOR color);
 void	ml_draw_box(t_mlx_image *image, t_iv pos, t_iv size, COLOR color);
 void	ml_draw_line(t_mlx_image *image, t_iv p1, t_iv p2, COLOR color);
 
 float	find_angle(t_fv p1, t_fv p2);
 
 void	init_game(t_data *data);
+
+void	import_map(char *path, t_data *data);
+void	format_map(t_data *data, bool, bool, t_ft_string *pass_a_null_here);
+void	validate_map(t_data *data);
 
 void	player_movement_hook(void *param);
 void	ray_cast_hook(void *param);

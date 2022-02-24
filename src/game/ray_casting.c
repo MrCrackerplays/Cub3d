@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 20:39:44 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/23 18:20:18 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/24 18:25:25 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ t_ray	cast_ray(t_data *data, float r_angle)
 {
 	t_ray				rays[2];
 	t_iv				dir;
-	float				ca;
 
 	if (r_angle < M_PI)
 		dir.y = 1;

@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:55:48 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/23 18:34:57 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/24 18:25:12 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	static_draw_walls(t_data *data)
 	{
 		line = ft_list_item_at(data->map, cor.y);
 		cor.x = 0;
-		while (cor.x < line->len)
+		while (cor.x < (int)line->len)
 		{
 			static_draw_wall(data, cor, line->text[cor.x]);
 			cor.x++;
