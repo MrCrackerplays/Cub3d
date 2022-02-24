@@ -6,29 +6,14 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 13:08:29 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 15:08:59 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/02/24 15:28:09 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <map.h>
+#include <cub3d.h>
 #include <libft.h>
 
-BOOL	ftc_is_alpha(unsigned char c)//TODO: replace with libft alternative
-{
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
-}
-
-BOOL	ftc_is_num(unsigned char c)//TODO: replace with libft alternative
-{
-	return (c >= '0' && c <= '9');
-}
-
-BOOL	ftc_is_alnum(unsigned char c)//TODO: replace with libft alternative
-{
-	return (ftc_is_alpha(c) || ftc_is_num(c));
-}
-
-BOOL	ftc_starts_with_any(char *src1, char **lst)
+BOOL	ftc_starts_with_any(char *src1, const char **lst)
 {
 	UINT	index;
 	UINT	item;
@@ -50,13 +35,13 @@ BOOL	ftc_starts_with_any(char *src1, char **lst)
 
 BOOL	is_path(char *line)
 {
-	const char	**extensions = {".xpm", ".png", NULL};
+	const char	*extensions[] = {".xpm\n", ".png\n", NULL};
 	size_t		len;
 
 	len = ft_strlen(line);
 	if (len < 4)
 		return (FALSE);
-	return (ftc_starts_with_any(line + (len - 4), extensions));
+	return (ftc_starts_with_any(line + (len - 5), extensions));
 }
 
 BOOL	is_color(char *line)
@@ -72,12 +57,14 @@ BOOL	is_color(char *line)
 	rgb[0] = 256;
 	rgb[1] = 256;
 	rgb[2] = 256;
-	while (line[i] && ((ftc_is_num(line[i - 1]) && line[i] == ','
-				&& ftc_is_num(line[i + 1])) || ftc_is_num(line[i])))
+	while (line[i] && (i == 0 || line[i - 1] != '\n')
+		&& ((ft_isdigit(line[i - 1]) && line[i] == ','
+				&& ft_isdigit(line[i + 1])) || ft_isdigit(line[i])
+			|| line[i] == '\n'))
 	{
 		if (index > 2)
 			return (FALSE);
-		if (line[i] == ',')
+		if (line[i] == ',' || line[i] == '\n')
 		{
 			rgb[index] = ft_atou(line + offset);
 			index++;
@@ -90,62 +77,210 @@ BOOL	is_color(char *line)
 
 BOOL	is_info(t_ft_string *line)
 {
-	const char	**paths = {"NO ", "SO ", "WE ", "EA ", NULL};
-	const char	**colors = {"F ", "C ", NULL};
+	const char	*paths[] = {"NO ", "SO ", "WE ", "EA ", NULL};
+	const char	*colors[] = {"F ", "C ", NULL};
 
 	if (ftc_starts_with_any(line->text, paths))
 		return (is_path(line->text + 3));
 	if (ftc_starts_with_any(line->text, colors))
 		return (is_color(line->text + 2));
-	return (line->len == 0);
+	return (line->len == 1 && line->text[0] == '\n');
 }
 
 BOOL	is_map_char(char c)
 {
-	return (c == '0' || c == '1'
+	return (c == '0' || c == '1' || c == ' '
 		|| c == 'N' || c == 'W' || c == 'E' || c == 'S');
 }
 
-t_map	*import_map_from_file(char *file_name)
+t_ft_string	*get_prefixed_line(t_ft_list *info_lines, char *pref)
 {
-	t_map		*new_map;
+	t_ft_string	*cur;
+	int			i;
+	t_ft_string	*found;
+
+	i = 0;
+	found = NULL;
+	while (i < info_lines->len)
+	{
+		cur = ft_list_item_at(info_lines, i);
+		if (ft_strstr(cur, pref) == cur)
+		{
+			if (found)
+				ft_exit_error("Duplicate info.");
+			found = cur;
+		}
+		i++;
+	}
+	if (!found)
+		ft_exit_error("Missing info.");
+	return (found);
+}
+
+t_mlx_image	*get_image_from_path(t_data *data, t_ft_list *info_lines, char *pref)
+{
+	t_ft_string	*line;
+	t_xpm		*xpm;
+	t_mlx_tex	*tex;
+	t_mlx_image	*img;
+
+	line = get_prefixed_line(info_lines, pref);
+	img = NULL;
+	//if line ends with .xpm
+		xpm = mlx_load_xpm42(line->text + ft_strlen(pref));
+		img = mlx_texture_to_image(data->mlx, &xpm->texture);
+		mlx_delete_xpm42(xpm);
+	//else if line ends with .png
+		tex = mlx_load_png(line->text + ft_strlen(pref));
+		img = mlx_texture_to_image(data->mlx, tex);
+		mlx_delete_texture(tex);
+	return (img);
+}
+
+COLOR	*get_color(t_ft_list *info_lines, char *pref)
+{
+	unsigned long long	rgb[3];
+	t_ft_string			*line;
+	int					offset;
+	int					i;
+	int					index;
+
+	line = get_prefixed_line(info_lines, pref);
+	offset = 0;
+	i = 0;
+	index = 0;
+	rgb[0] = 256;
+	rgb[1] = 256;
+	rgb[2] = 256;
+	while (line->text[i] && (i == 0 || line->text[i - 1] != '\n')
+		&& ((ft_isdigit(line->text[i - 1]) && line->text[i] == ','
+				&& ft_isdigit(line->text[i + 1])) || ft_isdigit(line->text[i])))
+	{
+		if (index > 2)
+			return (FALSE);
+		if (line->text[i] == ',' || line->text[i] == '\n')
+		{
+			rgb[index] = ft_atou(line + offset);
+			index++;
+			offset = i + 1;
+		}
+		i++;
+	}
+	return (i <= 12 && rgb[0] < 256 && rgb[1] < 256 && rgb[2] < 256);
+}
+
+void	insert_color_data(unsigned int *data, t_ft_list *info_lines, char *pref)
+{
+	t_ft_string	*cur;
+	int			i;
+	BOOL		found;
+
+	i = 0;
+	found = FALSE;
+	while (i < info_lines->len)
+	{
+		cur = ft_list_item_at(info_lines, i);
+		if (ft_strstr(cur, pref) == cur)
+		{
+			if (found)
+				ft_exit_error("Duplicate info.");
+			found = TRUE;
+			*data = ml_rgb(0, 0, 0);
+		}
+		i++;
+	}
+	if (!found)
+		ft_exit_error("Missing info.");
+}
+
+void	load_info(t_data *data, t_ft_string **line)
+{
+	int			i;
+	t_ft_list	*info_lines;
+
+	i = 0;
+	info_lines = ft_list_new();
+	while (i < data->map->len)
+	{
+		*line = ft_list_item_at(data->map, i);
+		if (is_info(*line) == FALSE)
+			break ;
+		if ((*line)->len > 1)
+			ft_list_add_back(info_lines, *line);
+	}
+	insert_data(data, info_lines, "NO ");
+	insert_data(data, info_lines, "SO ");
+	insert_data(data, info_lines, "WE ");
+	insert_data(data, info_lines, "EA ");
+	insert_data(data, info_lines, "F ");
+	insert_data(data, info_lines, "C ");
+	ft_list_free(info_lines);
+}
+
+t_ft_list	*remove_newlines(t_ft_list	*map)
+{
+	t_ft_string	*line;
+	int	i;
+
+	i = 0;
+	while (i < map->len)
+	{
+		line = ft_list_item_at(map, i);
+		if (line->text[line->len - 1] != '\n')
+			continue ;
+		ft_string_free(ft_string_cutout(line, line->len - 1, 1));
+	}
+	return (map);
+}
+
+void	import_map_from_file(t_data *data, char *file_name)
+{
 	t_ft_string	*line;
 	BOOL		map_mode;
 	int			i;
 	int			j;
 
-	new_map = ft_malloc(sizeof(t_map));
-	new_map->lines = ft_file_to_list(file_name);
+	data->map = remove_newlines(ft_file_to_list(file_name));
 	map_mode = FALSE;
 	i = 0;
-	while (i < new_map->lines->len)
+	load_info(data, &line);
+	while (i < data->map->len)
 	{
-		line = ft_list_item_at(new_map->lines, i);
+		line = ft_list_item_at(data->map, i);
 		if (map_mode == FALSE && is_info(line) == FALSE)
 			map_mode = TRUE;
 		if (!map_mode)
-			;//load data from line into data struct
+			printf("INFO LINE\n");
 		else
 		{
 			j = 0;
-			while (line->text[j])
+			while (line->text[j] && line->text[j] != '\n')
 				if (is_map_char(line->text[j++]) == FALSE)
-					;//incorrect map, deal with
+					ft_exit_error("Incorrect character in map.");
 		}
 		i++;
 	}
-	// ft_list_add_front(new_map->lines, line);
-	return (new_map);
 }
 
-char	map_get_at(t_map *map, UINT x, UINT y)
+char	true_map_get_at(t_ft_list *map, UINT x, UINT y)
 {
 	t_ft_string	*line;
 
-	if (y >= map->lines->len)
+	if (y >= (UINT)map->len)
 		return ('\0');
-	line = ft_list_item_at(map->lines, y);
+	line = ft_list_item_at(map, y);
 	if (x >= line->len)
 		return ('\0');
 	return (line->text[x]);
+}
+
+int	main(int argc, char **argv)
+{
+	t_data	data;
+
+	printf("a\n");
+	import_map_from_file(&data, argv[1]);
+	printf("b\n");
+	if (argc != 2)
+		return (2);
 }

@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/23 18:14:17 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/24 15:30:05 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ typedef struct s_data {
 	t_ray		rays[WIDTH + 1];
 	COLOR		roof;
 	COLOR		floor;
+	t_mlx_image	*north;
+	t_mlx_image	*east;
+	t_mlx_image	*south;
+	t_mlx_image	*west;
+	t_mlx_image	*door;
 	t_mlx_image	*minimap;
 	float		map_s;
 	t_fv		map_pos;
