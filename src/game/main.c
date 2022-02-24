@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:34:12 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 17:17:35 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/24 16:10:20 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int32_t	main(void)
 	mlx_loop_hook(data.mlx, &static_main_hook, &data);
 	mlx_loop_hook(data.mlx, &player_movement_hook, &data);
 	mlx_loop_hook(data.mlx, &ray_cast_hook, &data);
+	mlx_loop_hook(data.mlx, &map_hook, &data);
 	mlx_loop_hook(data.mlx, &minimap_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);

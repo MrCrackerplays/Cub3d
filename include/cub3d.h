@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/24 15:30:05 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/02/24 16:09:54 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	player_movement_hook(void *param);
 void	ray_cast_hook(void *param);
 
 void	minimap_hook(void *param);
+
+void	map_hook(void *param);
 
 char	map_get_at(t_ft_list *map, UINT x, UINT y);
 

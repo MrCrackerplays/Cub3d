@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 14:57:00 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/23 18:35:31 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/24 16:56:29 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,18 @@ void	init_game(t_data *data)
 	ft_list_add_back(data->map, ft_string_new("1000000000011"));
 	ft_list_add_back(data->map, ft_string_new("1011000000001"));
 	ft_list_add_back(data->map, ft_string_new("1010000111D11"));
-	ft_list_add_back(data->map, ft_string_new("10O0001100001"));
+	ft_list_add_back(data->map, ft_string_new("10D0001100001"));
 	ft_list_add_back(data->map, ft_string_new("1110001000001"));
 	ft_list_add_back(data->map, ft_string_new("1111111111111"));
+	data->north = mlx_new_image(data->mlx, 120, 120);
+	data->east = mlx_new_image(data->mlx, 120, 120);
+	data->south = mlx_new_image(data->mlx, 120, 120);
+	data->west = mlx_new_image(data->mlx, 120, 120);
+	data->door = mlx_new_image(data->mlx, 120, 120);
+	ml_draw_box(data->north, (t_iv){0,0}, (t_iv){120,120}, 0xFF0000FF);
+	ml_draw_box(data->east, (t_iv){0,0}, (t_iv){120,120}, 0xFFFFFFFF);
+	ml_draw_box(data->south, (t_iv){0,0}, (t_iv){120,120}, 0x00FF00FF);
+	ml_draw_box(data->west, (t_iv){0,0}, (t_iv){120,120}, 0x0000FFFF);
+	ml_draw_box(data->door, (t_iv){0,0}, (t_iv){120,120}, 0x000000FF);
 	init_minimap(data);
 }
