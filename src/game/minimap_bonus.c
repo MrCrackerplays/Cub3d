@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:55:48 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/24 18:25:12 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/25 19:13:50 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void	minimap_hook(void *param)
 			data->rays[i].hit_pos.x * data->map_s + data->map_pos.x,
 			data->rays[i].hit_pos.y * data->map_s + data->map_pos.y},
 			0xFFFFFFa0);
-		i += data->ray_skip;
+		i++;
 	}
 }

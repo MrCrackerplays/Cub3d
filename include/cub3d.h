@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/25 14:50:25 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/02/25 19:13:14 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct s_data {
 	t_fv		player_pos;
 	float		player_angle;
 	float		fov;
-	int			ray_skip;
 	int			ray_depth;
 	t_ray		rays[WIDTH + 1];
 	COLOR		roof;
@@ -98,7 +97,7 @@ void	ray_cast_hook(void *param);
 
 void	minimap_hook(void *param);
 
-void	map_hook(void *param);
+void	map_hook(t_data *data);
 
 char	map_get_at(t_ft_list *map, UINT x, UINT y);
 
