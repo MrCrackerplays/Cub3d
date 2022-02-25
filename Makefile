@@ -97,7 +97,7 @@ bonus: all
 
 run: all
 	@echo "[$(NAME)] running $(NAME)"
-	./$(NAME) maps/simple.cub
+	./$(NAME) maps/simple1.cub
 
 debug:
 	$(MAKE) DEBUG=1
