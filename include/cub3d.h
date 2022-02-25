@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/24 18:28:18 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/25 14:50:25 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_ray {
 	t_fv	hit_pos;
 	t_iv	hit_wall_pos;
 	float	len;
+	float	eye_len;
 	char	wall_face;
 	float	pos_on_wall;
 	char	wall_type;
