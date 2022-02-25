@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/02/25 17:40:50 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/02/25 18:32:27 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,13 @@ void	map_hook(void *param)
 			y = HEIGHT / 2 - (heights.x / 2) + j;
 			// printf("[i:%lu,h:%i,texheight:%u,%i*%f=%f]\n", i, h, texture->height, j, texel_step, j * texel_step);
 			if (y > 0 && y < HEIGHT)
-				ml_draw_pixel(data->screen, i, y, ((ml_rgb(ml_color_r(c) * darkness_mod, ml_color_g(c) * darkness_mod, ml_color_b(c) * darkness_mod))));
+				// ml_draw_pixel(data->screen, i, y, ((ml_rgb(ml_color_r(c) * darkness_mod, ml_color_g(c) * darkness_mod, ml_color_b(c) * darkness_mod))));
+				ml_draw_box(data->screen, (t_iv){i, y}, (t_iv){data->ray_skip, 1}, ((ml_rgb(ml_color_r(c) * darkness_mod, ml_color_g(c) * darkness_mod, ml_color_b(c) * darkness_mod))));
 			j++;
 		}
 		//for j=0 -> h
 		//draw_pixel(i, HEIGHT / 2 - (h / 2) + j, get_mapped_pixel())
 		// ml_draw_line(data->screen, (t_iv){i, HEIGHT / 2 - (h / 2)}, (t_iv){i, HEIGHT / 2 + (h / 2)}, get_color_at(decide_image(data, data->rays[i]), i * (data->rays[i].pos_on_wall), 0));
-		i++;
+		i += data->ray_skip;
 	}
 }
