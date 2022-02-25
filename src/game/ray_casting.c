@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 20:39:44 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/25 19:00:31 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/25 20:03:19 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ t_ray	cast_ray(t_data *data, float r_angle)
 	if (rays[0].len > rays[1].len)
 		rays[0] = rays[1];
 	rays[0].eye_len = rays[0].len * cosf(data->player_angle - r_angle);
+	if (!rays[0].wall_type)
+		rays[0].wall_face = '0';
 	return (rays[0]);
 }
 
