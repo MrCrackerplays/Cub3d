@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/02/25 20:01:32 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/26 17:57:51 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ void	map_hook(t_data *data)
 		texture = decide_image(data, data->rays[i]);
 		if (!texture)
 			continue ;
-		height = HEIGHT / data->rays[i].eye_len;
+		height = fminf(fabsf(HEIGHT / data->rays[i].eye_len), 10000000);
 		texel_step = ((float)texture->height) / height;
 		darkness_mod
-			= 1.0 / fminf(5.0, fmaxf(1.0, 0.75 * (data->rays[i].len - 2.5)));
+			= 1.0 / fminf(15.0, fmaxf(1.0, 0.75 * (data->rays[i].len - 2.5)));
 		static_draw_line(data, texture, i,
 			(float [3]){texel_step, height, darkness_mod});
 	}

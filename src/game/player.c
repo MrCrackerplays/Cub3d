@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:18:03 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/24 20:08:36 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/26 18:01:14 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,23 @@ static void	static_player_rotation(t_data *const data)
 	static_player_rotation_mouse(data);
 }
 
+static void	static_move_forward(t_data *const data, float angle)
+{
+	t_fv	move_vec;
+	float	move_dist;
+
+	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT))
+		move_dist = MOVE_SPEED * 2;
+	else
+		move_dist = MOVE_SPEED;
+	if (cast_ray(data, angle).len < move_dist)
+		return ;
+	move_vec.x = data->player_pos.x + move_dist * cosf(angle);
+	move_vec.y = data->player_pos.y + move_dist * sinf(angle);
+	if (!is_wall(map_get_at(data->map, move_vec.x, move_vec.y)))
+	data->player_pos = move_vec;
+}
+
 void	player_movement_hook(void *param)
 {
 	t_data *const	data = param;
@@ -93,8 +110,5 @@ void	player_movement_hook(void *param)
 	angle = atanf(move_vec.y / move_vec.x) + data->player_angle;
 	if (move_vec.x < 0)
 		angle += M_PI;
-	move_vec.x = data->player_pos.x + MOVE_SPEED * cosf(angle);
-	move_vec.y = data->player_pos.y + MOVE_SPEED * sinf(angle);
-	if (!is_wall(map_get_at(data->map, move_vec.x, move_vec.y)))
-		data->player_pos = move_vec;
+	static_move_forward(data, angle);
 }

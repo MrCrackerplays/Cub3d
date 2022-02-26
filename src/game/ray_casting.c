@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 20:39:44 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/25 20:03:19 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/02/26 17:32:11 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_ray
 	i = 0;
 	ray.wall_type = is_wall(
 			map_get_at(data->map, ray.hit_pos.x - cor, ray.hit_pos.y));
-	while (i < data->ray_depth && !ray.wall_type)
+	while (i < data->ray_depth && (ray.hit_pos.y < 0 || !ray.wall_type))
 	{
 		ray.hit_pos.x += dir.x;
 		ray.hit_pos.y += (tan_res * dir.x);
@@ -85,7 +85,7 @@ static t_ray
 	i = 0;
 	ray.wall_type = is_wall(
 			map_get_at(data->map, ray.hit_pos.x, ray.hit_pos.y - cor));
-	while (i < data->ray_depth && !ray.wall_type)
+	while (i < data->ray_depth && (ray.hit_pos.x < 0 || !ray.wall_type))
 	{
 		ray.hit_pos.y += dir.y;
 		ray.hit_pos.x += (tan_res * (-dir.y));
@@ -104,6 +104,7 @@ t_ray	cast_ray(t_data *data, float r_angle)
 	t_ray				rays[2];
 	t_iv				dir;
 
+	r_angle = fmodf(r_angle, 2.0 * M_PI);
 	if (r_angle < M_PI)
 		dir.y = 1;
 	else
@@ -133,8 +134,7 @@ void	ray_cast_hook(void *param)
 	while (i < WIDTH)
 	{
 		r_angle = data->player_angle - data->fov / 2 + data->fov * i / WIDTH;
-		data->rays[i] = cast_ray(data,
-				r_angle - ((int)(r_angle / 2.0 / M_PI)) * 2.0 * M_PI);
+		data->rays[i] = cast_ray(data, r_angle);
 		i++;
 	}
 }
