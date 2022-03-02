@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/02 15:01:44 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 17:48:42 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ t_mlx_image	*decide_image(t_data *data, t_ray ray)
 static void	static_draw_line(
 	t_data *data, t_mlx_image *texture, int i, float args[3])
 {
-	const float			texel_step = args[0];
-	const float			height = args[1];
-	const float			darkness_mod = args[2];
-	COLOR				c;
-	int					j;
+	const float	texel_step = args[0];
+	const float	height = args[1];
+	const float	darkness_mod = args[2];
+	COLOR		c;
+	int			j;
 
 	if (height > HEIGHT)
 		j = fmaxf((height - HEIGHT) / 2 - data->player_ud_angle, 0);
@@ -64,10 +64,10 @@ static void	static_draw_line(
 
 void	map_hook(t_data *data)
 {
-	int			i;
-	float		texel_step;
-	float		height;
-	float		darkness_mod;
+	int		i;
+	float	texel_step;
+	float	height;
+	float	darkness_mod;
 	t_mlx_image	*texture;
 
 	i = -1;
@@ -80,7 +80,7 @@ void	map_hook(t_data *data)
 		height = fminf(fabsf(HEIGHT / data->rays[i].eye_len), 10000000);
 		texel_step = ((float)texture->height) / height;
 		darkness_mod
-			= 1.0 / fminf(15.0, fmaxf(1.0, 0.75 * (data->rays[i].len - 2.5)));
+			= 1.0 / fminf(15.0, fmaxf(1.0, 0.25 * (data->rays[i].len)));
 		static_draw_line(data, texture, i,
 			(float [3]){texel_step, height, darkness_mod});
 	}
