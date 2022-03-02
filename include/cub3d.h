@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 09:37:47 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 13:33:53 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <libft.h>
+# include <stdbool.h>
 # undef __USE_MISC
 # define __USE_MISC
 # include <math.h>
@@ -58,6 +59,7 @@ typedef struct s_data {
 	t_ft_list	*map;
 	t_fv		player_pos;
 	float		player_angle;
+	float		player_ud_angle;
 	float		fov;
 	int			ray_depth;
 	t_ray		rays[WIDTH + 1];
@@ -93,7 +95,7 @@ void	import_map(char *path, t_data *data);
 void	format_map(t_data *data, bool, bool, t_ft_string *pass_a_null_here);
 void	validate_map(t_data *data);
 
-t_ray	cast_ray(t_data *data, float r_angle);
+t_ray	cast_ray(t_data *data, float r_angle, t_fv pos, bool mirror);
 
 void	player_movement_hook(void *param);
 void	ray_cast_hook(void *param);

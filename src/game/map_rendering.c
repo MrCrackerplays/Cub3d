@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/02/26 17:57:51 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 13:19:59 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ t_mlx_image	*decide_image(t_data *data, t_ray ray)
 	return (NULL);
 }
 
+static float	static_ud_angle(t_data *data, int j, float height)
+{
+	float a = (data->player_ud_angle - 1) * 1000.0;
+	return (a + j + data->player_ud_angle * (HEIGHT / 2 - (height / 2)));
+}
+
 static void	static_draw_line(
 	t_data *data, t_mlx_image *texture, int i, float args[3])
 {
@@ -45,14 +51,14 @@ static void	static_draw_line(
 	int					j;
 
 	if (height > HEIGHT)
-		j = height / 2 - HEIGHT / 2;
+		j = data->player_ud_angle * (height / 2 - HEIGHT / 2);
 	else
 		j = 0;
-	while (j < height && HEIGHT / 2 - (height / 2) + j < HEIGHT)
+	while (j < height && static_ud_angle(data, j, height) < HEIGHT)
 	{
 		c = get_color_at(texture, texture->width
 				* (data->rays[i].pos_on_wall), j * texel_step);
-		ml_draw_pixel(data->screen, i, HEIGHT / 2 - (height / 2) + j,
+		ml_draw_pixel(data->screen, i, static_ud_angle(data, j, height),
 			ml_rgb(ml_color_r(c) * darkness_mod, ml_color_g(c)
 				* darkness_mod, ml_color_b(c) * darkness_mod));
 		j++;
