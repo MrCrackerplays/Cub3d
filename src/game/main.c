@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:34:12 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/26 17:16:43 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 15:04:07 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	static_main_hook(void *param)
 	UINT			i;
 
 	i = 0;
-	while (i < data->screen->width * data->screen->height / 2)
+	while (i < data->screen->width * data->screen->height / 2
+		+ data->player_ud_angle * data->screen->width)
 	{
 		mlx_putpixel(data->screen, i, 0, data->roof);
 		i++;
@@ -48,9 +49,9 @@ int32_t	main(int argc, char **argv)
 	mlx_image_to_window(data.mlx, data.screen, 0, 0);
 	mlx_image_to_window(data.mlx, data.minimap, 0, 0);
 	mlx_loop_hook(data.mlx, &static_main_hook, &data);
-	mlx_loop_hook(data.mlx, &player_movement_hook, &data);
 	mlx_loop_hook(data.mlx, &ray_cast_hook, &data);
 	mlx_loop_hook(data.mlx, (void (*)(void *))map_hook, &data);
+	mlx_loop_hook(data.mlx, &player_movement_hook, &data);
 	mlx_loop_hook(data.mlx, &minimap_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
