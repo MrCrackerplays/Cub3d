@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/26 15:31:00 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 09:37:47 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	ml_draw_box(t_mlx_image *image, t_iv pos, t_iv size, COLOR color);
 void	ml_draw_line(t_mlx_image *image, t_iv p1, t_iv p2, COLOR color);
 
 float	find_angle(t_fv p1, t_fv p2);
+char	*skip_space(char *src);
 
 void	init_game(t_data *data);
 

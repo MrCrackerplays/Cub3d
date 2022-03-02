@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/24 19:10:13 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 09:40:19 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ static void
 	*b = true;
 	if (line->len < 7)
 		ft_exit_error("Wrong color format.");
-	i = 2;
+	i = 1;
+	while (line->text[i] == ' ')
+		i++;
 	*c = 255;
 	*c |= (static_get_color(line->text + i) << 24);
 	while (line->text[i] != ',')
@@ -93,13 +95,13 @@ void	format_map(t_data *data, bool r, bool f, t_ft_string *line)
 		if (line->len == 0)
 			;
 		else if (ft_strncmp(line->text, "NO ", 3) == 0)
-			static_try_to_load(data, &data->north, line->text + 3);
+			static_try_to_load(data, &data->north, skip_space(line->text + 2));
 		else if (ft_strncmp(line->text, "SO ", 3) == 0)
-			static_try_to_load(data, &data->south, line->text + 3);
+			static_try_to_load(data, &data->south, skip_space(line->text + 2));
 		else if (ft_strncmp(line->text, "EA ", 3) == 0)
-			static_try_to_load(data, &data->east, line->text + 3);
+			static_try_to_load(data, &data->east, skip_space(line->text + 2));
 		else if (ft_strncmp(line->text, "WE ", 3) == 0)
-			static_try_to_load(data, &data->west, line->text + 3);
+			static_try_to_load(data, &data->west, skip_space(line->text + 2));
 		else if (ft_strncmp(line->text, "F ", 2) == 0)
 			static_try_load_color(&data->floor, line, &f);
 		else if (ft_strncmp(line->text, "C ", 2) == 0)

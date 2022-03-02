@@ -20,6 +20,7 @@ OBJECTS := \
 	mlx/draw_pixel.o \
 	utils/find_angle.o \
 	utils/wall_types_bonus.o \
+	utils/skip_space.o \
 	map/get_at.o \
 	map/format.o \
 	map/import.o \
@@ -62,7 +63,7 @@ obj/%.o: src/%.c $(HEADER_FILES)
 
 $(MINILIBX_FOLDER)/Makefile:
 	@echo "[$(NAME)] MLX42 not detected, cloning MLX42"
-	git clone https://github.com/W2Codam/MLX42.git $(MINILIBX_FOLDER)
+	#git clone https://github.com/W2Codam/MLX42.git $(MINILIBX_FOLDER)
 
 $(MINILIBX_FILE): $(MINILIBX_FOLDER)/Makefile
 	@echo "[$(NAME)] pulling MLX42 updates"

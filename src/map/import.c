@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:42:35 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/26 17:53:02 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 09:16:15 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	import_map(char *file_path, t_data *data)
 	data->west = NULL;
 	format_map(data, false, false, NULL);
 	ft_list_add_front(data->map, ft_string_new(" "));
-	validate_map(data);
 	static_buffer_map(data);
+	validate_map(data);
 	free(ft_list_pop_back(data->map));
 }

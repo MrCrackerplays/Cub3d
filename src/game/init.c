@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 14:57:00 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/26 17:59:36 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 09:33:54 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,27 @@
 
 static void	init_minimap(t_data *data)
 {
+	t_ft_list_node	*longest;
+	t_ft_list_node	*parse;
+
+	parse = data->map->first;
+	longest = parse;
+	while (parse)
+	{
+		if (((t_ft_string *)parse->item)->len
+			> ((t_ft_string *)longest->item)->len)
+			longest = parse;
+		parse = parse->next;
+	}
 	data->minimap = mlx_new_image(data->mlx, WIDTH / 4, HEIGHT / 4);
 	data->map_s = fmin(
-			data->minimap->width / ((t_ft_string *)data->map->first->item)->len,
+			data->minimap->width / ((t_ft_string *)longest->item)->len,
 			data->minimap->height / data->map->len);
 	data->map_pos = (t_fv){-data->map_s, -data->map_s};
 }
 
 void	init_game(t_data *data)
 {
-	data->player_pos = (t_fv){2.5, 2.5};
-	data->player_angle = 2.0 * M_PI;
 	data->fov = (70 * M_PI / 180);
 	data->ray_depth = 30;
 	data->screen = mlx_new_image(data->mlx, WIDTH, HEIGHT);
