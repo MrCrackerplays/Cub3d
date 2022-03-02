@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 13:33:53 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 17:25:12 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ void	import_map(char *path, t_data *data);
 void	format_map(t_data *data, bool, bool, t_ft_string *pass_a_null_here);
 void	validate_map(t_data *data);
 
-t_ray	cast_ray(t_data *data, float r_angle, t_fv pos, bool mirror);
+t_ray	cast_ray(t_data *data, float r_angle, t_fv pos, float mirror_len);
+
+t_ray	mirror_hit(t_data *data, float r_angle, t_ray ray, float mirror_len);
 
 void	player_movement_hook(void *param);
 void	ray_cast_hook(void *param);

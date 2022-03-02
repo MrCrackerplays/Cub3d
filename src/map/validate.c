@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 17:53:15 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 09:17:51 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 12:38:22 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool	static_is_in_wall_and_set_player(t_data *data, t_iv pos, char c)
 			data->player_angle += M_PI;
 		return (true);
 	}	
-	return (c == '0' || c == 'D' || c == 'O');
+	return (c == '0' || c == 'D' || c == 'O' || c == 'M');
 }
 
 static void	static_test_tile(t_data *data, t_iv pos)

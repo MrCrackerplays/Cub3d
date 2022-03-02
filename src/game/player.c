@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:18:03 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 15:02:30 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 17:44:55 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /* BONUS */
 static void	static_player_door(t_data *const data)
 {
-	t_fv			move_vec;
-	static bool		last;
+	t_fv		move_vec;
+	static bool	last;
 
 	if (!mlx_is_key_down(data->mlx, MLX_KEY_E) || last
 		|| map_get_at(data->map, data->player_pos.x, data->player_pos.y) == 'O')
@@ -85,7 +85,7 @@ static void	static_move_forward(t_data *const data, float angle)
 		move_dist = MOVE_SPEED * 2;
 	else
 		move_dist = MOVE_SPEED;
-	if (cast_ray(data, angle, data->player_pos, false).len < move_dist)
+	if (cast_ray(data, angle, data->player_pos, 0).len < move_dist)
 		return ;
 	move_vec.x = data->player_pos.x + move_dist * cosf(angle);
 	move_vec.y = data->player_pos.y + move_dist * sinf(angle);

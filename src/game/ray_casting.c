@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 20:39:44 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 13:37:33 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 17:50:56 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static t_ray	static_ray_with_face_hit(t_ray ray, t_iv dir, char func)
 	if (func == 'x')
 	{
 		if (dir.x == 1)
-			ray.wall_face = 'e';
-		else
 			ray.wall_face = 'w';
+		else
+			ray.wall_face = 'e';
 		if (dir.x == 1)
 			ray.pos_on_wall = ray.hit_pos.y - (int)ray.hit_pos.y;
 		else
@@ -28,9 +28,9 @@ static t_ray	static_ray_with_face_hit(t_ray ray, t_iv dir, char func)
 	else
 	{
 		if (dir.y == 1)
-			ray.wall_face = 's';
-		else
 			ray.wall_face = 'n';
+		else
+			ray.wall_face = 's';
 		if (dir.y == 1)
 			ray.pos_on_wall = 1 - (ray.hit_pos.x - (int)ray.hit_pos.x);
 		else
@@ -42,9 +42,9 @@ static t_ray	static_ray_with_face_hit(t_ray ray, t_iv dir, char func)
 static t_ray
 	static_ray_x(t_data *data, float tan_res, t_iv dir, t_fv pos)
 {
-	t_ray		ray;
-	int			i;
-	int			cor;
+	t_ray	ray;
+	int		i;
+	int		cor;
 
 	cor = dir.x == -1;
 	ray.hit_pos.x = (int)pos.x + dir.x + cor;
@@ -72,9 +72,9 @@ static t_ray
 static t_ray
 	static_ray_y(t_data *data, float tan_res, t_iv dir, t_fv pos)
 {
-	t_ray		ray;
-	int			i;
-	int			cor;
+	t_ray	ray;
+	int		i;
+	int		cor;
 
 	cor = dir.y == -1;
 	ray.hit_pos.y = (int)pos.y + dir.y + cor;
@@ -99,10 +99,10 @@ static t_ray
 	return (static_ray_with_face_hit(ray, dir, 'y'));
 }
 
-t_ray	cast_ray(t_data *data, float r_angle, t_fv pos, bool mirror)
+t_ray	cast_ray(t_data *data, float r_angle, t_fv pos, float mirror_len)
 {
-	t_ray				rays[2];
-	t_iv				dir;
+	t_ray	rays[2];
+	t_iv	dir;
 
 	r_angle = fmodf(r_angle, 2.0 * M_PI);
 	if (r_angle < M_PI)
@@ -118,7 +118,8 @@ t_ray	cast_ray(t_data *data, float r_angle, t_fv pos, bool mirror)
 	rays[1] = static_ray_y(data, tanf(r_angle + M_PI_2), dir, pos);
 	if (rays[0].len > rays[1].len)
 		rays[0] = rays[1];
-	/* MIRROR */
+	if (mirror_len > 0 && rays[0].wall_type == 'M')
+		rays[0] = mirror_hit(data, r_angle, rays[0], mirror_len);
 	rays[0].eye_len = rays[0].len * cosf(data->player_angle - r_angle);
 	if (!rays[0].wall_type)
 		rays[0].wall_face = '0';
@@ -135,7 +136,8 @@ void	ray_cast_hook(void *param)
 	while (i < WIDTH)
 	{
 		r_angle = data->player_angle - data->fov / 2 + data->fov * i / WIDTH;
-		data->rays[i] = cast_ray(data, r_angle, data->player_pos, true);
+		data->rays[i]
+			= cast_ray(data, r_angle, data->player_pos, data->ray_depth);
 		i++;
 	}
 }

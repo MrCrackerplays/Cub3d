@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 17:20:18 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/23 18:04:42 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/01 17:05:30 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	is_wall(char c)
 {
-	if (c == '1' || c == 'D')
+	if (c == '1' || c == 'D' || c == 'M')
 		return (c);
 	return ('\0');
 }

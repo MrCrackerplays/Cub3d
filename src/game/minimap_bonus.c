@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:55:48 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 09:34:08 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/02 17:07:55 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static void	static_draw_wall(t_data *data, t_iv cor, char type)
 			(t_iv){cor.x * data->map_s + data->map_pos.x,
 			cor.y * data->map_s + data->map_pos.y},
 			(t_iv){data->map_s, data->map_s}, 0x804000a0);
+	else if (type == 'M')
+		ml_draw_box(data->minimap,
+			(t_iv){cor.x * data->map_s + data->map_pos.x,
+			cor.y * data->map_s + data->map_pos.y},
+			(t_iv){data->map_s, data->map_s}, 0x89f05fa0);
 	else if (type == 'W' || type == 'E' || type == 'N' || type == 'S')
 		ml_draw_box(data->minimap,
 			(t_iv){cor.x * data->map_s + data->map_pos.x,
