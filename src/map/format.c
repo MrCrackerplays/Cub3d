@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/03 18:26:06 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/03 18:51:14 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	static_try_to_load(t_data *data, t_mlx_image **img, char *file_path)
 {
-	t_t_mlxexture	*png_tex;
+	t_mlx_texture	*png_tex;
 	t_xpm			*xmp;
 
 	if (*img)
