@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 09:40:19 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/03 12:31:53 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static BYTE	static_get_color(char *src)
 static void
 	static_try_load_color(COLOR *c, t_ft_string *line, bool *b)
 {
-	int		i;
+	int	i;
 
 	if (*b)
 		ft_exit_error("Reassigning of color.");
