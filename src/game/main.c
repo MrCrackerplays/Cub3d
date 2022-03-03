@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:34:12 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/03 18:23:49 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/03 19:01:33 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	static_main_hook(void *param)
 	t_data *const	data = param;
 	UINT			i;
 
-	printf("%f\n", 1 / data->mlx->delta_time);
 	i = 0;
 	while (i < data->screen->width * data->screen->height / 2
 		+ data->player_ud_angle * data->screen->width)
