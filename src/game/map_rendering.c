@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/02 17:48:42 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/03 12:11:42 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ static void	static_draw_line(
 
 void	map_hook(t_data *data)
 {
-	int		i;
-	float	texel_step;
-	float	height;
-	float	darkness_mod;
+	int			i;
+	float		texel_step;
+	float		height;
+	float		darkness_mod;
 	t_mlx_image	*texture;
 
 	i = -1;
