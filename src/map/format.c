@@ -6,29 +6,20 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 09:40:19 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/03 18:26:06 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void	static_test_access(char *file_path)
-{
-	const int	fd = open(file_path, O_RDONLY);
-
-	close(fd);
-	if (fd < 0)
-		ft_exit_error("Can't load image.");
-}
-
 static void	static_try_to_load(t_data *data, t_mlx_image **img, char *file_path)
 {
-	t_mlx_texture	*png_tex;
+	t_t_mlxexture	*png_tex;
 	t_xpm			*xmp;
 
 	if (*img)
 		ft_exit_error("Reassigning of image.");
-	static_test_access(file_path);
+	test_access(file_path, "Can't load image.");
 	if (ft_strcmp(file_path + ft_strlen(file_path) - 4, ".png") == 0)
 	{
 		png_tex = mlx_load_png(file_path);
@@ -87,30 +78,50 @@ static void
 	*c |= static_get_color(line->text + i) << 8;
 }
 
-void	format_map(t_data *data, bool r, bool f, t_ft_string *line)
+static void	static_parse_thing(
+	t_data *data, t_ft_hash_map *texs, bool *r, bool *f)
 {
+	t_ft_string	*line;
+	char		*des;
+
 	while (true)
 	{
 		line = ft_list_pop_front(data->map);
+		des = ft_strndup(line->text, 3);
 		if (line->len == 0)
 			;
-		else if (ft_strncmp(line->text, "NO ", 3) == 0)
-			static_try_to_load(data, &data->north, skip_space(line->text + 2));
-		else if (ft_strncmp(line->text, "SO ", 3) == 0)
-			static_try_to_load(data, &data->south, skip_space(line->text + 2));
-		else if (ft_strncmp(line->text, "EA ", 3) == 0)
-			static_try_to_load(data, &data->east, skip_space(line->text + 2));
-		else if (ft_strncmp(line->text, "WE ", 3) == 0)
-			static_try_to_load(data, &data->west, skip_space(line->text + 2));
+		else if (ft_hash_map_has_key(texs, des))
+			static_try_to_load(
+				data, ft_hash_map_get(texs, des), skip_space(line->text + 2));
 		else if (ft_strncmp(line->text, "F ", 2) == 0)
-			static_try_load_color(&data->floor, line, &f);
+			static_try_load_color(&data->floor, line, f);
 		else if (ft_strncmp(line->text, "C ", 2) == 0)
-			static_try_load_color(&data->roof, line, &r);
+			static_try_load_color(&data->roof, line, r);
 		else
 			break ;
-		ft_string_free(line);
+		ft_free3(des, line->text, line);
 	}
 	ft_list_add_front(data->map, line);
-	if (!r || !f || !data->north || !data->south || !data->west || !data->east)
-		ft_exit_error("Invalid map (missing arguments).");
+	free(des);
+}
+
+void	format_map(t_data *data)
+{
+	t_ft_hash_map	*texs;
+	bool			r;
+	bool			f;
+
+	f = false;
+	r = false;
+	texs = ft_hash_map_new(100);
+	ft_hash_map_set(texs, "NO ", &data->north);
+	ft_hash_map_set(texs, "SO ", &data->south);
+	ft_hash_map_set(texs, "EA ", &data->east);
+	ft_hash_map_set(texs, "WE ", &data->west);
+	ft_hash_map_set(texs, "DO ", &data->door);
+	static_parse_thing(data, texs, &r, &f);
+	ft_hash_map_free(texs);
+	if (!r || !f || !data->north || !data->south || !data->west || !data->east
+		|| !data->door)
+		ft_exit_error("Invalid map.");
 }

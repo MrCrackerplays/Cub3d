@@ -6,21 +6,12 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:42:35 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 09:16:15 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/03 16:21:55 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 #include <fcntl.h>
-
-static void	static_test_access(char *file_path)
-{
-	const int	fd = open(file_path, O_RDONLY);
-
-	close(fd);
-	if (fd < 0)
-		ft_exit_error("Can't load map.");
-}
 
 static void	static_remove_newlines(t_data *data)
 {
@@ -57,7 +48,7 @@ void	import_map(char *file_path, t_data *data)
 {
 	if (ft_strcmp(file_path + ft_strlen(file_path) - 4, ".cub"))
 		ft_exit_error("Wrong file type.");
-	static_test_access(file_path);
+	test_access(file_path, "Can't load map.");
 	data->map = ft_file_to_list(file_path);
 	if (data->map->len < 9)
 		ft_exit_error("Invalid map.");
@@ -66,7 +57,7 @@ void	import_map(char *file_path, t_data *data)
 	data->south = NULL;
 	data->east = NULL;
 	data->west = NULL;
-	format_map(data, false, false, NULL);
+	format_map(data);
 	ft_list_add_front(data->map, ft_string_new(" "));
 	static_buffer_map(data);
 	validate_map(data);
