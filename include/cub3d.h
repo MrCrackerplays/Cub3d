@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/03 18:21:17 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/03 18:59:43 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 # define MOVE_SPEED .05
 # define ROT_SPEED .05
-# define WIDTH 2569
-# define HEIGHT 1600
+# define WIDTH 1280
+# define HEIGHT 720
 
 typedef struct s_fvector {
 	float	x;
