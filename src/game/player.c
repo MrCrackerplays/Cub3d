@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:18:03 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 17:44:55 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/04 17:58:54 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static void	static_player_rotation_mouse(t_data *const data)
 	if (mouse_x < 0 || mouse_x > WIDTH || mouse_y < 0 || mouse_y > HEIGHT)
 		return ;
 	mlx_set_mouse_pos(data->mlx, WIDTH / 2, HEIGHT / 2);
-	data->player_ud_angle -= mouse_y - HEIGHT / 2;
-	if (data->player_ud_angle > 200)
-		data->player_ud_angle = 200;
-	else if (data->player_ud_angle < -200)
-		data->player_ud_angle = -200;
+	data->player_ud_angle -= (mouse_y - HEIGHT / 2);
+	if (data->player_ud_angle > 600)
+		data->player_ud_angle = 600;
+	else if (data->player_ud_angle < -600)
+		data->player_ud_angle = -600;
 	data->player_angle += ((float)(mouse_x - WIDTH / 2)) * .0025;
 	if (data->player_angle >= 4.0 * M_PI)
 			data->player_angle -= 2.0 * M_PI;
