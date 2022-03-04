@@ -6,14 +6,14 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 17:25:12 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/03 18:59:43 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "MLX42/MLX42.h"
 # include <libft.h>
 # include <stdbool.h>
 # undef __USE_MISC
@@ -88,11 +88,12 @@ void	ml_draw_line(t_mlx_image *image, t_iv p1, t_iv p2, COLOR color);
 
 float	find_angle(t_fv p1, t_fv p2);
 char	*skip_space(char *src);
+void	test_access(char *file_path, char *message);
 
 void	init_game(t_data *data);
 
 void	import_map(char *path, t_data *data);
-void	format_map(t_data *data, bool, bool, t_ft_string *pass_a_null_here);
+void	format_map(t_data *data);
 void	validate_map(t_data *data);
 
 t_ray	cast_ray(t_data *data, float r_angle, t_fv pos, float mirror_len);

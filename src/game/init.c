@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 14:57:00 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 12:56:25 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/03 16:06:03 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,5 @@ void	init_game(t_data *data)
 	data->player_ud_angle = 1;
 	data->screen = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
-	data->door = mlx_new_image(data->mlx, 120, 120);
-	ml_draw_box(data->door, (t_iv){0, 0}, (t_iv){60, 60}, 0x000000FF);
-	ml_draw_box(data->door, (t_iv){60, 60}, (t_iv){60, 60}, 0xFF0000FF);
 	init_minimap(data);
 }

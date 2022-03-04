@@ -22,6 +22,7 @@ OBJECTS := \
 	utils/find_angle.o \
 	utils/wall_types_bonus.o \
 	utils/skip_space.o \
+	utils/test_access.o \
 	map/get_at.o \
 	map/format.o \
 	map/import.o \
@@ -64,12 +65,12 @@ obj/%.o: src/%.c $(HEADER_FILES)
 
 $(MINILIBX_FOLDER)/Makefile:
 	@echo "[$(NAME)] MLX42 not detected, cloning MLX42"
-	git clone https://github.com/W2Codam/MLX42.git $(MINILIBX_FOLDER)
+	git clone -b Norme https://github.com/W2Codam/MLX42.git $(MINILIBX_FOLDER)
 
 $(MINILIBX_FILE): $(MINILIBX_FOLDER)/Makefile
 	@echo "[$(NAME)] pulling MLX42 updates"
 	cd $(MINILIBX_FOLDER)
-	git pull
+	#git pull
 	cd ..
 	@echo "[$(NAME)] compiling MLX42"
 	$(MAKE) -C ./$(MINILIBX_FOLDER)
