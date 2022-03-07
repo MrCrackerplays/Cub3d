@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/04 16:48:03 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/07 16:48:50 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,12 @@ void	format_map(t_data *data)
 	ft_hash_map_set(texs, "SO ", &data->south);
 	ft_hash_map_set(texs, "EA ", &data->east);
 	ft_hash_map_set(texs, "WE ", &data->west);
-	ft_hash_map_set(texs, "DO ", &data->door);
+	ft_hash_map_set(texs, "D0 ", &data->door[0]);
+	ft_hash_map_set(texs, "D1 ", &data->door[1]);
+	ft_hash_map_set(texs, "D2 ", &data->door[2]);
 	static_parse_thing(data, texs, &r, &f);
 	ft_hash_map_free(texs);
 	if (!r || !f || !data->north || !data->south || !data->west || !data->east
-		|| !data->door)
+		|| !data->door[0] || !data->door[1] || !data->door[2])
 		ft_exit_error("Invalid map.");
 }

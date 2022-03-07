@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/03 18:59:43 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/07 16:47:24 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ typedef struct s_data {
 	t_mlx_image	*east;
 	t_mlx_image	*south;
 	t_mlx_image	*west;
-	t_mlx_image	*door;
+	t_mlx_image	*door[3];
 	t_mlx_image	*minimap;
 	float		map_s;
 	t_fv		map_pos;
+	double		game_time;
 }	t_data;
 
 COLOR	ml_rgba(BYTE r, BYTE g, BYTE b, BYTE a);
