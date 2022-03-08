@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/07 17:42:18 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/08 12:12:47 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	map_hook(t_data *data)
 	t_mlx_image	*texture;
 
 	i = -1;
+	// printf("type:'%c'\n", data->rays[WIDTH / 2].wall_type);
 	while (i < WIDTH - 1)
 	{
 		i++;

@@ -13,7 +13,8 @@ OBJECTS := \
 	game/minimap_bonus.o \
 	game/player.o \
 	game/ray_casting.o \
-	game/mirror.o \
+	game/mirror_bonus.o \
+	game/ceiling_bonus.o \
 	mlx/color.o \
 	mlx/color_info.o \
 	mlx/draw_box.o \
