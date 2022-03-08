@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ceiling.c                                          :+:    :+:            */
+/*   ceiling_bonus.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 15:53:43 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/08 14:08:12 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/08 16:47:14 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,9 @@ void	ceiling_hook(t_data *data)
 			p = HEIGHT / 2 - (int)y + data->player_ud_angle;
 		row_distance = ((float)(HEIGHT * 0.5)) / ((float)p);
 		magic_function_one(data, y, row_distance,
-			(float [4]){(data->player_pos.x + row_distance * ray_dir_left.x),
-			(data->player_pos.y + row_distance * ray_dir_left.y),
+			(float [4]){
+			(data->player_pos.x * .83 + row_distance * ray_dir_left.x),
+			(data->player_pos.y * .83 + row_distance * ray_dir_left.y),
 			(row_distance * (ray_dir_right.x - ray_dir_left.x) / WIDTH),
 			(row_distance * (ray_dir_right.y - ray_dir_left.y) / WIDTH)});
 		y++;

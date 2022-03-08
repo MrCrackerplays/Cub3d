@@ -6,13 +6,13 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 14:57:00 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/07 16:42:08 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/08 19:48:40 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void	init_minimap(t_data *data)
+static void	init_bonus(t_data *data)
 {
 	t_ft_list_node	*longest;
 	t_ft_list_node	*parse;
@@ -41,5 +41,5 @@ void	init_game(t_data *data)
 	data->screen = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	data->game_time = 0;
-	init_minimap(data);
+	init_bonus(data);
 }

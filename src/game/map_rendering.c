@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/08 12:12:47 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/08 18:03:25 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static COLOR	get_color_at(t_mlx_image *img, size_t x, size_t y)
 t_mlx_image	*decide_image(t_data *data, t_ray ray)
 {
 	if (ray.wall_type == 'D')
-		return (data->door[(int)fmod(floor(data->game_time / 1), 3)]);
+		return (data->door[((int)(data->game_time / .5)) % 3]);
 	if (ray.wall_face == 'n')
 		return (data->north);
 	if (ray.wall_face == 'e')

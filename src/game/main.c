@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:34:12 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/08 14:09:31 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/08 14:38:03 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ int32_t	main(int argc, char **argv)
 	mlx_loop_hook(data.mlx, &ray_cast_hook, &data);
 	mlx_loop_hook(data.mlx, (void (*)(void *))ceiling_hook, &data);
 	mlx_loop_hook(data.mlx, (void (*)(void *))map_hook, &data);
+	mlx_loop_hook(data.mlx, (void (*)(void *))sprite_hook, &data);
 	mlx_loop_hook(data.mlx, &player_movement_hook, &data);
 	mlx_loop_hook(data.mlx, &minimap_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
-	return (EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }

@@ -15,6 +15,7 @@ OBJECTS := \
 	game/ray_casting.o \
 	game/mirror_bonus.o \
 	game/ceiling_bonus.o \
+	game/sprite_bonus.o \
 	mlx/color.o \
 	mlx/color_info.o \
 	mlx/draw_box.o \
@@ -24,6 +25,7 @@ OBJECTS := \
 	utils/wall_types_bonus.o \
 	utils/skip_space.o \
 	utils/test_access.o \
+	utils/sprite_new.o \
 	map/get_at.o \
 	map/format.o \
 	map/import.o \

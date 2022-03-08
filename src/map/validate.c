@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 17:53:15 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/02 12:38:22 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/08 18:46:12 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 static bool	static_is_in_wall_and_set_player(t_data *data, t_iv pos, char c)
 {
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+	if (c == 'C')
+	{
+		ft_list_add_back(data->sprites, sprite_new(pos.x + .5, pos.y + .5));
+		return (true);
+	}
+	else if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 	{
 		if (data->player_pos.x != 0)
 			ft_exit_error("Reassigning player position.");
@@ -69,4 +74,6 @@ void	validate_map(t_data *data)
 		}
 		pos.y++;
 	}
+	if (data->player_pos.x == 0)
+		ft_exit_error("Invalid map.");
 }
