@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/08 19:38:39 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/09 16:54:04 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ float		find_angle(t_fv p1, t_fv p2);
 char		*skip_space(char *src);
 void		test_access(char *file_path, char *message);
 t_sprite	*sprite_new(float x, float y);
+float		ray_angle_fix(t_data *data, int i);
 
 void		init_game(t_data *data);
 

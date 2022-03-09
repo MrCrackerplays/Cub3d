@@ -26,6 +26,7 @@ OBJECTS := \
 	utils/skip_space.o \
 	utils/test_access.o \
 	utils/sprite_new.o \
+	utils/ray_angle_fix.o \
 	map/get_at.o \
 	map/format.o \
 	map/import.o \
