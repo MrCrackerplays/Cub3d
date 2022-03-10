@@ -6,12 +6,11 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:42:35 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/08 18:43:13 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/10 14:54:41 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-#include <fcntl.h>
 
 static void	static_remove_newlines(t_data *data)
 {
