@@ -6,15 +6,11 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 16:26:50 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/08 16:17:13 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/10 14:40:26 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-// angle = atanf(move_vec.y / move_vec.x) + data->player_angle;
-// if (move_vec.x < 0)
-// 	angle += M_PI;
 
 float	find_angle(t_fv p1, t_fv p2)
 {

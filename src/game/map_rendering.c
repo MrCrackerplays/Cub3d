@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/08 18:03:25 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/10 14:37:14 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	static_draw_line(
 				* darkness_mod, ml_color_b(c) * darkness_mod));
 		j++;
 	}
-	j = 0;
 }
 
 void	map_hook(t_data *data)
@@ -71,7 +70,6 @@ void	map_hook(t_data *data)
 	t_mlx_image	*texture;
 
 	i = -1;
-	// printf("type:'%c'\n", data->rays[WIDTH / 2].wall_type);
 	while (i < WIDTH - 1)
 	{
 		i++;

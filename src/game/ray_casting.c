@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 20:39:44 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/09 18:58:15 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/10 14:27:38 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ void	ray_cast_hook(void *param)
 	i = 0;
 	while (i < WIDTH)
 	{
-		//r_angle = data->player_angle - data->fov / 2 + data->fov * i / WIDTH;
 		r_angle = data->player_angle + ray_angle_fix(data, i);
 		data->rays[i]
 			= cast_ray(data, r_angle, data->player_pos, data->ray_depth);

@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 15:53:43 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/09 18:58:38 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/10 14:22:13 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ void	ceiling_hook(t_data *data)
 		else
 			p = HEIGHT / 2 - (int)y + data->player_ud_angle;
 		row_distance = ((float)(HEIGHT * 0.5)) / ((float)p);
-		magic_function_one(data, y, row_distance,
-			(float [4]){
+		magic_function_one(data, y, row_distance, (float [4]){
 			(data->player_pos.x * .82 + row_distance * ray_dir_left.x),
 			(data->player_pos.y * .82 + row_distance * ray_dir_left.y),
 			(row_distance * (ray_dir_right.x - ray_dir_left.x) / WIDTH),

@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/09 16:08:33 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/09 16:55:26 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/10 14:40:55 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ float	ray_angle_fix(t_data *data, int i)
 
 	screen_halflen = tanf(data->fov / 2);
 	seg_len = screen_halflen / (WIDTH / 2);
-	return (atanf((seg_len * i - screen_halflen)));
+	return (atanf(seg_len * i - screen_halflen));
 }
