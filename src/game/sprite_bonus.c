@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 14:36:06 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/09 19:01:13 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/10 12:08:37 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,23 @@ static void	static_draw_line(t_data *data, t_sprite *sprite, float i, int pos)
 	COLOR	c;
 	int		j;
 	int		y;
+	float	darkness_mod;
 
 	if (sprite->size_y > HEIGHT)
 		j = fmaxf((sprite->size_y - HEIGHT) / 2 - data->player_ud_angle, 0);
 	else
 		j = 0;
 	y = data->player_ud_angle + j + (HEIGHT - sprite->size_y) / 2;
+	darkness_mod = 1.0 / fminf(15.0, fmaxf(1.0, 0.25 * (sprite->dis)));
 	while (j < sprite->size_y && y < HEIGHT)
 	{
 		c = get_color_at(sprite->image, i / sprite->size_x
 				* sprite->image->width,
 				j / sprite->size_y * sprite->image->height);
 		if (ml_color_a(c) > 128)
-			ml_draw_pixel(data->screen, pos, y, c);
+			ml_draw_pixel(data->screen, pos, y, ml_rgba(ml_color_r(c) \
+			* darkness_mod, ml_color_g(c) * darkness_mod, ml_color_b(c) \
+			* darkness_mod, ml_color_a(c)));
 		j++;
 		y = data->player_ud_angle + j + (HEIGHT - sprite->size_y) / 2;
 	}
