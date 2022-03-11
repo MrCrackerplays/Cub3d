@@ -40,7 +40,7 @@ HEADER_FILES := $(addprefix include/,$(HEADER_FILES))
 INCLUDE := include libft/include $(MINILIBX_FOLDER)/include
 INCLUDE := $(addprefix -I,$(INCLUDE))
 
-CFLAGS ?= -Wall -Wextra
+CFLAGS ?= -Wall -Werror -Wextra
 ifdef DEBUG
 CFLAGS := -g $(CFLAGS)
 endif
