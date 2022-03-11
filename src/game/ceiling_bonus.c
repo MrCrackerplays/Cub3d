@@ -6,19 +6,11 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 15:53:43 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/10 14:22:13 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/11 13:47:42 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-static COLOR	get_color_at(t_mlx_image *img, size_t x, size_t y)
-{
-	uint8_t	*pixel;
-
-	pixel = img->pixels + (y * (4 * img->width)) + (4 * x);
-	return (ml_rgba(pixel[0], pixel[1], pixel[2], pixel[3]));
-}
 
 static COLOR	darken(COLOR c, float distance)
 {
@@ -47,7 +39,7 @@ static void	magic_function_one(t_data *data, UINT y, float row_distance,
 			|| y < floor(HEIGHT / 2 - height / 2 + data->player_ud_angle)
 			|| y >= floor(HEIGHT / 2 + height / 2 + data->player_ud_angle))
 		{
-			mlx_putpixel(data->screen, x, y, darken(get_color_at(texture, \
+			ml_draw_pixel(data->screen, x, y, darken(get_color_at(texture, \
 				((int)(texture->width * (floor_data[0] - floor(floor_data[0]))) \
 				& (texture->width - 1)), ((int)(texture->height \
 				* (floor_data[1] - floor(floor_data[1]))) \

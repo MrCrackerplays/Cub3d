@@ -6,19 +6,11 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 14:36:06 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/10 12:08:37 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/11 13:34:39 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-static COLOR	get_color_at(t_mlx_image *img, int x, int y)
-{
-	uint8_t		*pixel;
-
-	pixel = img->pixels + (y * (4 * img->width)) + (4 * x);
-	return (ml_rgba(pixel[0], pixel[1], pixel[2], pixel[3]));
-}
 
 static void	static_draw_line(t_data *data, t_sprite *sprite, float i, int pos)
 {

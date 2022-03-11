@@ -21,6 +21,7 @@ OBJECTS := \
 	mlx/draw_box.o \
 	mlx/draw_line.o \
 	mlx/draw_pixel.o \
+	mlx/get_color_at.o \
 	utils/find_angle.o \
 	utils/wall_types_bonus.o \
 	utils/skip_space.o \
@@ -39,7 +40,7 @@ HEADER_FILES := $(addprefix include/,$(HEADER_FILES))
 INCLUDE := include libft/include $(MINILIBX_FOLDER)/include
 INCLUDE := $(addprefix -I,$(INCLUDE))
 
-CFLAGS ?= -Wall -Werror -Wextra
+CFLAGS ?= -Wall -Wextra
 ifdef DEBUG
 CFLAGS := -g $(CFLAGS)
 endif
@@ -74,7 +75,7 @@ $(MINILIBX_FOLDER)/Makefile:
 $(MINILIBX_FILE): $(MINILIBX_FOLDER)/Makefile
 	@echo "[$(NAME)] pulling MLX42 updates"
 	cd $(MINILIBX_FOLDER)
-	#git pull
+	git pull
 	cd ..
 	@echo "[$(NAME)] compiling MLX42"
 	$(MAKE) -C ./$(MINILIBX_FOLDER)

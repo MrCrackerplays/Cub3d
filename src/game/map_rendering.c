@@ -6,19 +6,11 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/10 14:37:14 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/11 13:47:08 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-static COLOR	get_color_at(t_mlx_image *img, size_t x, size_t y)
-{
-	uint8_t	*pixel;
-
-	pixel = img->pixels + (y * (4 * img->width)) + (4 * x);
-	return (ml_rgba(pixel[0], pixel[1], pixel[2], pixel[3]));
-}
 
 t_mlx_image	*decide_image(t_data *data, t_ray ray)
 {

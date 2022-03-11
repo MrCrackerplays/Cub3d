@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/09 16:54:04 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/11 13:34:20 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ BYTE		ml_color_g(COLOR rgba);
 BYTE		ml_color_b(COLOR rgba);
 BYTE		ml_color_a(COLOR rgba);
 
+
+COLOR		get_color_at(t_mlx_image *img, size_t x, size_t y);
 void		ml_draw_pixel(t_mlx_image *img, UINT x, UINT y, COLOR color);
 void		ml_draw_box(t_mlx_image *image, t_iv pos, t_iv size, COLOR color);
 void		ml_draw_line(t_mlx_image *image, t_iv p1, t_iv p2, COLOR color);

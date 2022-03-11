@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   color.c                                            :+:    :+:            */
+/*   get_color_at.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
+/*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/11/09 17:44:24 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/11 13:23:03 by rdrazsky      ########   odam.nl         */
+/*   Created: 2022/03/11 12:25:22 by rdrazsky      #+#    #+#                 */
+/*   Updated: 2022/03/11 13:33:43 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <cub3d.h>
 
-UINT	ml_rgba(BYTE r, BYTE g, BYTE b, BYTE a)
+COLOR	get_color_at(t_mlx_image *img, size_t x, size_t y)
 {
-	return (r | g << 8 | b << 16 | a << 24);
-}
+	COLOR	*pixel;
 
-UINT	ml_rgb(BYTE r, BYTE g, BYTE b)
-{
-	return (r | g << 8 | b << 16 | 255 << 24);
+	pixel = img->pixels + (y * (4 * img->width)) + (4 * x);
+	return (*pixel);
 }

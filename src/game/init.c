@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 14:57:00 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/08 19:48:40 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/11 13:46:37 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	init_bonus(t_data *data)
 		parse = parse->next;
 	}
 	data->minimap = mlx_new_image(data->mlx, WIDTH / 4, HEIGHT / 4);
+	mlx_image_to_window(data->mlx, data->minimap, 0, 0);
 	data->map_s = fmin(
 			data->minimap->width / ((t_ft_string *)longest->item)->len,
 			data->minimap->height / data->map->len);
@@ -41,5 +42,6 @@ void	init_game(t_data *data)
 	data->screen = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
 	data->game_time = 0;
+	mlx_image_to_window(data->mlx, data->screen, 0, 0);
 	init_bonus(data);
 }

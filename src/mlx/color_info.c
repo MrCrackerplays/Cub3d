@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/09 17:44:24 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/22 15:18:32 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/11 13:25:25 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 BYTE	ml_color_r(UINT rgba)
 {
-	return (rgba >> 24);
+	return (rgba);
 }
 
 BYTE	ml_color_g(UINT rgba)
 {
-	return (rgba >> 16);
+	return (rgba >> 8);
 }
 
 BYTE	ml_color_b(UINT rgba)
 {
-	return (rgba >> 8);
+	return (rgba >> 16);
 }
 
 BYTE	ml_color_a(UINT rgba)
 {
-	return (rgba);
+	return (rgba >> 24);
 }

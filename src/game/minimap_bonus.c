@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:55:48 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/03 18:20:02 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/11 13:39:21 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,27 @@ static void	static_draw_wall(t_data *data, t_iv cor, char type)
 		ml_draw_box(data->minimap,
 			(t_iv){cor.x * data->map_s + data->map_pos.x,
 			cor.y * data->map_s + data->map_pos.y},
-			(t_iv){data->map_s, data->map_s}, 0x000000a0);
+			(t_iv){data->map_s, data->map_s}, 0xa0000000);
 	else if (type == 'D')
 		ml_draw_box(data->minimap,
 			(t_iv){cor.x * data->map_s + data->map_pos.x,
 			cor.y * data->map_s + data->map_pos.y},
-			(t_iv){data->map_s, data->map_s}, 0xFF8000a0);
+			(t_iv){data->map_s, data->map_s}, 0xa00080FF);
 	else if (type == 'O')
 		ml_draw_box(data->minimap,
 			(t_iv){cor.x * data->map_s + data->map_pos.x,
 			cor.y * data->map_s + data->map_pos.y},
-			(t_iv){data->map_s, data->map_s}, 0x804000a0);
+			(t_iv){data->map_s, data->map_s}, 0xa0004080);
 	else if (type == 'M')
 		ml_draw_box(data->minimap,
 			(t_iv){cor.x * data->map_s + data->map_pos.x,
 			cor.y * data->map_s + data->map_pos.y},
-			(t_iv){data->map_s, data->map_s}, 0x89f05fa0);
+			(t_iv){data->map_s, data->map_s}, 0xa05ff089);
 	else if (type == 'W' || type == 'E' || type == 'N' || type == 'S')
 		ml_draw_box(data->minimap,
 			(t_iv){cor.x * data->map_s + data->map_pos.x,
 			cor.y * data->map_s + data->map_pos.y},
-			(t_iv){data->map_s, data->map_s}, 0x00FFFFa0);
+			(t_iv){data->map_s, data->map_s}, 0xa0FFFF00);
 }
 
 static void	static_draw_walls(t_data *data)
@@ -82,7 +82,7 @@ void	minimap_hook(void *param)
 			(t_iv){
 			data->rays[i].hit_pos.x * data->map_s + data->map_pos.x,
 			data->rays[i].hit_pos.y * data->map_s + data->map_pos.y},
-			0xFFFFFFa0);
+			0xa0FFFFFF);
 		i++;
 	}
 }
