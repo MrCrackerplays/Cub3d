@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/03 18:33:19 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/02/13 18:35:17 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/11 12:40:57 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ char	*ft_strncpy(char *des, const char *src, size_t n)
 		des[i] = src[i];
 		i++;
 	}
-	while (i < n)
-	{
-		des[i] = '\0';
-		i++;
-	}
+	des[n] = '\0';
 	return (des);
 }
