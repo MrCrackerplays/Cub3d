@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 15:53:43 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/11 13:47:42 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/12 20:05:19 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	magic_function_one(t_data *data, UINT y, float row_distance,
 			|| y < floor(HEIGHT / 2 - height / 2 + data->player_ud_angle)
 			|| y >= floor(HEIGHT / 2 + height / 2 + data->player_ud_angle))
 		{
-			ml_draw_pixel(data->screen, x, y, darken(get_color_at(texture, \
+			ml_draw_pixel(data->screen, x, y, darken(ml_color_at(texture, \
 				((int)(texture->width * (floor_data[0] - floor(floor_data[0]))) \
 				& (texture->width - 1)), ((int)(texture->height \
 				* (floor_data[1] - floor(floor_data[1]))) \
@@ -72,8 +72,8 @@ void	ceiling_hook(t_data *data)
 			p = HEIGHT / 2 - (int)y + data->player_ud_angle;
 		row_distance = ((float)(HEIGHT * 0.5)) / ((float)p);
 		magic_function_one(data, y, row_distance, (float [4]){
-			(data->player_pos.x * .82 + row_distance * ray_dir_left.x),
-			(data->player_pos.y * .82 + row_distance * ray_dir_left.y),
+			(data->player_pos.x * .76 + row_distance * ray_dir_left.x),
+			(data->player_pos.y * .76 + row_distance * ray_dir_left.y),
 			(row_distance * (ray_dir_right.x - ray_dir_left.x) / WIDTH),
 			(row_distance * (ray_dir_right.y - ray_dir_left.y) / WIDTH)});
 		y++;

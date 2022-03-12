@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/11 13:47:08 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/12 20:05:19 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	static_draw_line(
 	while (j < height && data->player_ud_angle
 		+ j + (HEIGHT - height) / 2 < HEIGHT)
 	{
-		c = get_color_at(texture, texture->width
+		c = ml_color_at(texture, texture->width
 				* (data->rays[i].pos_on_wall), j * texel_step);
 		ml_draw_pixel(data->screen, i, data->player_ud_angle
 			+ j + (HEIGHT - height) / 2,

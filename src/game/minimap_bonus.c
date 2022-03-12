@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:55:48 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/11 13:39:21 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/12 19:52:29 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +60,31 @@ static void	static_draw_walls(t_data *data)
 	}
 }
 
-void	minimap_hook(void *param)
+void	minimap_hook(t_data *data)
 {
-	t_data *const	data = param;
 	size_t			i;
+	t_iv			cord;
 
-	i = 0;
-	while (i < data->minimap->width * data->minimap->height)
+	cord.x = 0;
+	while (cord.x < (int)data->minimap->width)
 	{
-		mlx_putpixel(data->minimap, i, 0, 0);
-		i++;
+		cord.y = 0;
+		while (cord.y < (int)data->minimap->height)
+		{
+			ml_draw_pixel(data->minimap, cord.x, cord.y, 0x000000ff);
+			cord.y++;
+		}
+		cord.x++;
 	}
 	static_draw_walls(data);
 	i = 0;
 	while (i < WIDTH)
 	{
-		ml_draw_line(data->minimap,
-			(t_iv){
-			data->player_pos.x * data->map_s + data->map_pos.x,
-			data->player_pos.y * data->map_s + data->map_pos.y},
-			(t_iv){
-			data->rays[i].hit_pos.x * data->map_s + data->map_pos.x,
-			data->rays[i].hit_pos.y * data->map_s + data->map_pos.y},
-			0xa0FFFFFF);
+		ml_draw_line(data->minimap, (t_iv){data->player_pos.x * data->map_s
+			+ data->map_pos.x, data->player_pos.y * data->map_s
+			+ data->map_pos.y}, (t_iv){data->rays[i].hit_pos.x * data->map_s
+			+ data->map_pos.x, data->rays[i].hit_pos.y * data->map_s
+			+ data->map_pos.y}, 0xa0FFFFFF);
 		i++;
 	}
 }

@@ -16,6 +16,7 @@ OBJECTS := \
 	game/mirror_bonus.o \
 	game/ceiling_bonus.o \
 	game/sprite_bonus.o \
+	game/sprite_draw_bonus.o \
 	mlx/color.o \
 	mlx/color_info.o \
 	mlx/draw_box.o \

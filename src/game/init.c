@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 14:57:00 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/11 13:46:37 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/12 18:42:29 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	init_bonus(t_data *data)
 
 void	init_game(t_data *data)
 {
-	data->fov = (70 * M_PI / 180);
+	data->fov = (80 * M_PI / 180);
 	data->ray_depth = 30;
 	data->player_ud_angle = 1;
 	data->screen = mlx_new_image(data->mlx, WIDTH, HEIGHT);

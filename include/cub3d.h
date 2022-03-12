@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/11 13:34:20 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/12 20:05:19 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_data {
 	t_fv		player_pos;
 	float		player_angle;
 	float		player_ud_angle;
+	t_fv		dir;
+	t_fv		plane;
 	float		fov;
 	int			ray_depth;
 	t_ray		rays[WIDTH + 1];
@@ -91,7 +93,7 @@ BYTE		ml_color_b(COLOR rgba);
 BYTE		ml_color_a(COLOR rgba);
 
 
-COLOR		get_color_at(t_mlx_image *img, size_t x, size_t y);
+COLOR		ml_color_at(t_mlx_image *img, UINT x, UINT y);
 void		ml_draw_pixel(t_mlx_image *img, UINT x, UINT y, COLOR color);
 void		ml_draw_box(t_mlx_image *image, t_iv pos, t_iv size, COLOR color);
 void		ml_draw_line(t_mlx_image *image, t_iv p1, t_iv p2, COLOR color);
@@ -116,7 +118,7 @@ t_ray		mirror_hit(
 void		player_movement_hook(void *param);
 void		ray_cast_hook(void *param);
 
-void		minimap_hook(void *param);
+void		minimap_hook(t_data *data);
 void		ceiling_hook(t_data *param);
 void		map_hook(t_data *data);
 void		sprite_hook(t_data *data);

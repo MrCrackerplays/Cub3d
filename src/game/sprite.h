@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_color_at.c                                     :+:    :+:            */
+/*   sprite.h                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
+/*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/11 12:25:22 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/12 20:05:19 by rdrazsky      ########   odam.nl         */
+/*   Created: 2022/03/12 19:22:23 by rdrazsky      #+#    #+#                 */
+/*   Updated: 2022/03/12 19:22:54 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#ifndef SPRITE_H
+# define SPRITE_H
 
-COLOR	ml_color_at(t_mlx_image *img, UINT x, UINT y)
-{
-	COLOR	*pixel;
+void	draw_sprite(t_data *data, t_sprite *sprite);
 
-	if (x >= img->width || y >= img->height)
-		return (0xffFF00FF);
-	pixel = (COLOR *)(img->pixels + (y * (4 * img->width)) + (4 * x));
-	return (*pixel);
-}
+#endif

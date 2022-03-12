@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:34:12 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/11 13:44:52 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/12 20:00:49 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	static_main_hook(void *param)
 		data->ray_depth++;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
+	// ft_print(1, "\x1b[A{ FPS: %i }\n", (int)(1 / data->mlx->delta_time));
 }
 
 int32_t	main(int argc, char **argv)
@@ -58,7 +59,7 @@ int32_t	main(int argc, char **argv)
 	mlx_loop_hook(data.mlx, (void (*)(void *))map_hook, &data);
 	mlx_loop_hook(data.mlx, (void (*)(void *))sprite_hook, &data);
 	mlx_loop_hook(data.mlx, &player_movement_hook, &data);
-	mlx_loop_hook(data.mlx, &minimap_hook, &data);
+	mlx_loop_hook(data.mlx, (void (*)(void *))minimap_hook, &data);
 	mlx_loop(data.mlx);
 	mlx_terminate(data.mlx);
 	exit(EXIT_SUCCESS);

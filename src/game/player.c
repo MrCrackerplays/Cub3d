@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:18:03 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/07 11:25:40 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/12 18:20:48 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,10 @@ void	player_movement_hook(void *param)
 
 	static_player_rotation(data);
 	static_player_door(data);
+	data->dir.x = cosf(data->player_angle);
+	data->dir.y = sinf(data->player_angle);
+	data->plane.x = -data->dir.y * tan(data->fov / 2);
+	data->plane.y = data->dir.x * tan(data->fov / 2);
 	move_vec = (t_fv){0, 0};
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		move_vec.x++;
