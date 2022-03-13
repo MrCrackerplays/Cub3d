@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 15:53:43 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/12 20:05:19 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/13 18:36:39 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 static COLOR	darken(COLOR c, float distance)
 {
-	float	darkness_mod;
-
-	darkness_mod = 1.0 / fminf(15.0, fmaxf(1.0, 0.25 * (distance)));
-	return (ml_rgb(ml_color_r(c) * darkness_mod, ml_color_g(c) * darkness_mod,
-			ml_color_b(c) * darkness_mod));
+	return (ml_color_darken(c,
+			1.0 / fminf(15.0, fmaxf(1.0, 0.25 * (distance)))));
 }
 
 static void	magic_function_one(t_data *data, UINT y, float row_distance,

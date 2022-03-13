@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/11 12:25:22 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/12 20:05:19 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/13 18:03:58 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ COLOR	ml_color_at(t_mlx_image *img, UINT x, UINT y)
 
 	if (x >= img->width || y >= img->height)
 		return (0xffFF00FF);
-	pixel = (COLOR *)(img->pixels + (y * (4 * img->width)) + (4 * x));
+	pixel = (COLOR *)(img->pixels + (x + y * img->width) * sizeof(COLOR));
 	return (*pixel);
 }

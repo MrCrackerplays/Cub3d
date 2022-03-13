@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/12 20:05:19 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/13 18:08:08 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ BYTE		ml_color_r(COLOR rgba);
 BYTE		ml_color_g(COLOR rgba);
 BYTE		ml_color_b(COLOR rgba);
 BYTE		ml_color_a(COLOR rgba);
+COLOR		ml_color_darken(COLOR c, float darkness_mod);
 
 
 COLOR		ml_color_at(t_mlx_image *img, UINT x, UINT y);

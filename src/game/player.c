@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:18:03 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/12 18:20:48 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/13 17:51:25 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ static void	static_move_forward(t_data *const data, float angle)
 		move_dist = MOVE_SPEED;
 	if (cast_ray(data, angle, data->player_pos, 0).len < move_dist)
 		return ;
-	move_vec.x = data->player_pos.x + move_dist * cosf(angle);
-	move_vec.y = data->player_pos.y + move_dist * sinf(angle);
+	move_vec.x = data->player_pos.x + move_dist * cosf(angle)
+		* data->mlx->delta_time * 50;
+	move_vec.y = data->player_pos.y + move_dist * sinf(angle)
+		* data->mlx->delta_time * 50;
 	if (!is_wall(map_get_at(data->map, move_vec.x, move_vec.y)))
 	data->player_pos = move_vec;
 }
