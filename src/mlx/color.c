@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/09 17:44:24 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/13 18:27:25 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/13 19:25:11 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ COLOR	ml_color_darken(COLOR c, float darkness_mod)
 {
 	BYTE	*ptr;
 
+	if (darkness_mod == 1)
+		return (c);
 	ptr = (BYTE *)&c;
 	ptr[0] *= darkness_mod;
 	ptr[1] *= darkness_mod;
