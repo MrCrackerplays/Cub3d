@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:18:03 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/13 17:51:25 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/15 14:14:45 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	static_player_rotation_mouse(t_data *const data)
 	int	mouse_x;
 	int	mouse_y;
 
+	static_player_door(data);
 	mlx_get_mouse_pos(data->mlx, &mouse_x, &mouse_y);
 	if (mouse_x < 0 || mouse_x > WIDTH || mouse_y < 0 || mouse_y > HEIGHT)
 		return ;
@@ -80,12 +81,16 @@ static void	static_move_forward(t_data *const data, float angle)
 {
 	t_fv	move_vec;
 	float	move_dist;
+	float	min_dist;
 
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT))
 		move_dist = MOVE_SPEED * 2;
 	else
 		move_dist = MOVE_SPEED;
-	if (cast_ray(data, angle, data->player_pos, 0).len < move_dist)
+	min_dist = fmaxf(.1, move_dist);
+	if (cast_ray(data, angle, data->player_pos, 0).len < min_dist
+		|| cast_ray(data, angle + M_PI_4, data->player_pos, 0).len < min_dist
+		|| cast_ray(data, angle - M_PI_4, data->player_pos, 0).len < min_dist)
 		return ;
 	move_vec.x = data->player_pos.x + move_dist * cosf(angle)
 		* data->mlx->delta_time * 50;
@@ -102,7 +107,6 @@ void	player_movement_hook(void *param)
 	t_fv			move_vec;
 
 	static_player_rotation(data);
-	static_player_door(data);
 	data->dir.x = cosf(data->player_angle);
 	data->dir.y = sinf(data->player_angle);
 	data->plane.x = -data->dir.y * tan(data->fov / 2);
