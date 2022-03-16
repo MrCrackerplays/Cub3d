@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:55:48 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/12 19:52:29 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/16 16:07:18 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	minimap_hook(t_data *data)
 	{
 		ml_draw_line(data->minimap, (t_iv){data->player_pos.x * data->map_s
 			+ data->map_pos.x, data->player_pos.y * data->map_s
-			+ data->map_pos.y}, (t_iv){data->rays[i].hit_pos.x * data->map_s
-			+ data->map_pos.x, data->rays[i].hit_pos.y * data->map_s
+			+ data->map_pos.y}, (t_iv){data->rays[i].init_hit_pos.x * data->map_s
+			+ data->map_pos.x, data->rays[i].init_hit_pos.y * data->map_s
 			+ data->map_pos.y}, 0xa0FFFFFF);
 		i++;
 	}

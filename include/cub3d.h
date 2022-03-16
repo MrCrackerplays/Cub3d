@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/16 15:41:40 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/16 16:05:57 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_ivector {
 }	t_iv;
 
 typedef struct s_ray {
+	t_fv	init_hit_pos;
 	t_fv	hit_pos;
 	t_iv	hit_wall_pos;
 	float	len;
