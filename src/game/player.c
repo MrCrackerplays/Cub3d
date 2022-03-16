@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:18:03 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/15 14:14:45 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/16 16:00:16 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,23 +81,20 @@ static void	static_move_forward(t_data *const data, float angle)
 {
 	t_fv	move_vec;
 	float	move_dist;
-	float	min_dist;
 
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT_SHIFT))
 		move_dist = MOVE_SPEED * 2;
 	else
 		move_dist = MOVE_SPEED;
-	min_dist = fmaxf(.1, move_dist);
-	if (cast_ray(data, angle, data->player_pos, 0).len < min_dist
-		|| cast_ray(data, angle + M_PI_4, data->player_pos, 0).len < min_dist
-		|| cast_ray(data, angle - M_PI_4, data->player_pos, 0).len < min_dist)
-		return ;
 	move_vec.x = data->player_pos.x + move_dist * cosf(angle)
 		* data->mlx->delta_time * 50;
 	move_vec.y = data->player_pos.y + move_dist * sinf(angle)
 		* data->mlx->delta_time * 50;
-	if (!is_wall(map_get_at(data->map, move_vec.x, move_vec.y)))
-	data->player_pos = move_vec;
+	if (!is_wall(map_get_at(data->map, move_vec.x, data->player_pos.y)))
+		data->player_pos.x = move_vec.x;
+	if (!is_wall(map_get_at(data->map, data->player_pos.x, move_vec.y)))
+		data->player_pos.y = move_vec.y;
+	player_collision_correction(data);
 }
 
 void	player_movement_hook(void *param)
@@ -112,6 +109,8 @@ void	player_movement_hook(void *param)
 	data->plane.x = -data->dir.y * tan(data->fov / 2);
 	data->plane.y = data->dir.x * tan(data->fov / 2);
 	move_vec = (t_fv){0, 0};
+	if (mlx_is_key_down(data->mlx, MLX_KEY_R))
+		data->player_pos = (t_fv){2, 2};
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
 		move_vec.x++;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))

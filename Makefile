@@ -12,6 +12,7 @@ OBJECTS := \
 	game/map_rendering.o \
 	game/minimap_bonus.o \
 	game/player.o \
+	game/player_collision_bonus.o \
 	game/ray_casting.o \
 	game/mirror_bonus.o \
 	game/ceiling_bonus.o \

@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/13 18:08:08 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/16 15:41:40 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define ROT_SPEED .05
 # define WIDTH 1280
 # define HEIGHT 720
+
+# define WALL_DIST .1
 
 typedef struct s_fvector {
 	float	x;
@@ -115,6 +117,8 @@ t_ray		cast_ray(t_data *data, float r_angle, t_fv pos, float mirror_len);
 
 t_ray		mirror_hit(
 				t_data *data, float r_angle, t_ray ray, float mirror_len);
+
+void		player_collision_correction(t_data *data);
 
 void		player_movement_hook(void *param);
 void		ray_cast_hook(void *param);
