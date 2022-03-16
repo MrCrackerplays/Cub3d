@@ -6,17 +6,16 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/12 19:21:56 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/13 18:41:40 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/16 14:56:11 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
 static COLOR	static_get_color_at(
-	t_sprite *sprite, t_iv vecs[2], int ss_x)
+	t_sprite *sprite, t_iv pos, t_iv sprite_s, int ss_x)
 {
-	const t_iv	pos = vecs[0];
-	const t_iv	sprite_s = vecs[1];
+	float		dark_mod;
 	COLOR		c;
 
 	c = ml_color_at(sprite->image,
@@ -24,7 +23,12 @@ static COLOR	static_get_color_at(
 			* sprite->image->width / sprite_s.x,
 			(pos.y + (sprite_s.y - HEIGHT) / 2)
 			* sprite->image->height / sprite_s.y);
-	return (ml_color_darken(c, 1.0 / fmaxf(1.0, 0.25 * (sprite->dis))));
+	if (c == 0)
+		return (0);
+	dark_mod = 1.0 / fmaxf(1.0, 0.25 * (sprite->dis));
+	if (dark_mod == 1)
+		return (c);
+	return (ml_color_darken(c, dark_mod));
 }
 
 static void	draw_sprite2(
@@ -43,9 +47,8 @@ static void	draw_sprite2(
 			pos.y = vecs[1].x;
 			while (pos.y < vecs[1].y)
 			{
-				c = static_get_color_at(
-						sprite, (t_iv [2]){pos, vecs[2]}, ss_x);
-				if (((BYTE *)&c)[3] > 128)
+				c = static_get_color_at(sprite, pos, vecs[2], ss_x);
+				if (c != 0)
 					ml_draw_pixel(data->screen,
 						pos.x, pos.y + data->player_ud_angle,
 						c);
