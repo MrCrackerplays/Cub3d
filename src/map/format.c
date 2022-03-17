@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/08 18:43:52 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 16:58:47 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,10 @@ static void	static_parse_thing(
 	free(des);
 }
 
-void	format_map(t_data *data)
+void	format_map(t_data *data, bool r, bool f)
 {
 	t_ft_hash_map	*texs;
-	bool			r;
-	bool			f;
 
-	f = false;
-	r = false;
 	texs = ft_hash_map_new(100);
 	ft_hash_map_set(texs, "NO ", &data->north);
 	ft_hash_map_set(texs, "SO ", &data->south);
@@ -124,10 +120,13 @@ void	format_map(t_data *data)
 	ft_hash_map_set(texs, "S0 ", &data->sprite[0]);
 	ft_hash_map_set(texs, "S1 ", &data->sprite[1]);
 	ft_hash_map_set(texs, "S2 ", &data->sprite[2]);
+	ft_hash_map_set(texs, "CI ", &data->ceil_img);
+	ft_hash_map_set(texs, "FI ", &data->floor_img);
 	static_parse_thing(data, texs, &r, &f);
 	ft_hash_map_free(texs);
 	if (!r || !f || !data->north || !data->south || !data->west || !data->east
 		|| !data->door[0] || !data->door[1] || !data->door[2]
-		|| !data->sprite[0] || !data->sprite[1] || !data->sprite[2])
+		|| !data->sprite[0] || !data->sprite[1] || !data->sprite[2]
+		|| !data->ceil_img || !data->floor_img)
 		ft_exit_error("Invalid map.");
 }

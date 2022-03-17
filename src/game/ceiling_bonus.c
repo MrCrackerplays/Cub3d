@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 15:53:43 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/16 18:09:09 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 12:46:01 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void	magic_function_one(t_data *data, UINT y, float row_distance,
 	float		height;
 	t_mlx_image	*texture;
 
-	texture = data->north;
+	texture = data->ceil_img;
 	if (y > HEIGHT / 2 + data->player_ud_angle)
-		texture = data->south;
+		texture = data->floor_img;
 	x = 0;
 	while (x < WIDTH)
 	{
@@ -37,10 +37,10 @@ static void	magic_function_one(t_data *data, UINT y, float row_distance,
 			|| y >= floor(HEIGHT / 2 + height / 2 + data->player_ud_angle))
 		{
 			ml_draw_pixel(data->screen, x, y, darken(ml_color_at(texture, \
-				((int)(texture->width * (floor_data[0] - floor(floor_data[0]))) \
-				& (texture->width - 1)), ((int)(texture->height \
-				* (floor_data[1] - floor(floor_data[1]))) \
-				& (texture->height - 1))), row_distance));
+				(int)(texture->width * (floor_data[0] \
+				- floorf(floor_data[0]))) % texture->width, \
+				(int)(texture->height * (floor_data[1] \
+				- floorf(floor_data[1]))) % texture->height), row_distance));
 		}
 		floor_data[0] += floor_data[2];
 		floor_data[1] += floor_data[3];

@@ -11,6 +11,9 @@ S0 textures/Door0.png
 S1 textures/Door1.png
 S2 textures/Door2.png
 
+CI textures/no.png
+FI textures/so.png
+
 C 64,128,192
 F 32,128,64
 

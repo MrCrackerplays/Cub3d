@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:42:35 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/10 14:54:41 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/17 16:59:33 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ void	import_map(char *file_path, t_data *data)
 	data->sprite[0] = NULL;
 	data->sprite[1] = NULL;
 	data->sprite[2] = NULL;
+	data->ceil_img = NULL;
+	data->floor_img = NULL;
 	data->sprites = ft_list_new();
-	format_map(data);
+	format_map(data, false, false);
 	ft_list_add_front(data->map, ft_string_new(" "));
 	static_buffer_map(data);
 	validate_map(data);

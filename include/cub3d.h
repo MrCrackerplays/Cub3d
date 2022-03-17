@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/17 16:33:34 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 16:59:14 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_data {
 	t_mlx_image	*door[3];
 	t_mlx_image	*sprite[3];
 	t_mlx_image	*minimap;
+	t_mlx_image	*ceil_img;
+	t_mlx_image	*floor_img;
 	float		map_s;
 	t_fv		map_pos;
 	double		game_time;
@@ -114,7 +116,7 @@ float		ray_angle_fix(t_data *data, int i);
 void		init_game(t_data *data);
 
 void		import_map(char *path, t_data *data);
-void		format_map(t_data *data);
+void		format_map(t_data *data, bool r, bool f);
 void		validate_map(t_data *data);
 
 t_ray		cast_ray(t_data *data, float r_angle, t_fv pos, float mirror_len);
