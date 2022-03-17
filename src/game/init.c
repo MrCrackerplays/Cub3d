@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/22 14:57:00 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/12 18:42:29 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 16:37:18 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	init_bonus(t_data *data)
 
 void	init_game(t_data *data)
 {
+	data->bitmode = 1;
 	data->fov = (80 * M_PI / 180);
 	data->ray_depth = 30;
 	data->player_ud_angle = 1;

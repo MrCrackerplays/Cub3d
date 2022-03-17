@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 14:36:06 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/12 19:23:07 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 16:36:38 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ void	sprite_hook(t_data *data)
 		if (((t_sprite *)parse->item)->dis < ((t_sprite *)parse->next->item)
 			->dis)
 		{
-			draw_sprite(data, parse->next->item);
 			temp = parse->item;
 			parse->item = parse->next->item;
 			parse->next->item = temp;
 		}
-		else
-			draw_sprite(data, parse->item);
 		parse = parse->next;
 	}
-	draw_sprite(data, data->sprites->last->item);
+	while (parse)
+	{
+		draw_sprite(data, parse->item);
+		parse = parse->prev;
+	}
 }

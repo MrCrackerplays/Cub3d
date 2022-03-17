@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:34:12 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/12 20:00:49 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 16:35:25 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,20 @@ static void	static_main_hook(void *param)
 {
 	t_data *const	data = param;
 	UINT			i;
+	t_iv			cord;
 
+	cord.x = 0;
+	while (cord.x < WIDTH)
+	{
+		cord.y = 0;
+		while (cord.y < HEIGHT)
+		{
+			data->bitmap[cord.x][cord.y] = data->bitmode;
+			cord.y++;
+		}
+		cord.x++;
+	}
+	data->bitmode = !data->bitmode;
 	i = 0;
 	// printf("fps:%f,depth:%i\n", 1.0 / data->mlx->delta_time, data->ray_depth);
 	data->game_time += data->mlx->delta_time;
@@ -55,8 +68,8 @@ int32_t	main(int argc, char **argv)
 	init_game(&data);
 	mlx_loop_hook(data.mlx, &static_main_hook, &data);
 	mlx_loop_hook(data.mlx, &ray_cast_hook, &data);
-	mlx_loop_hook(data.mlx, (void (*)(void *))ceiling_hook, &data);
 	mlx_loop_hook(data.mlx, (void (*)(void *))map_hook, &data);
+	mlx_loop_hook(data.mlx, (void (*)(void *))ceiling_hook, &data);
 	mlx_loop_hook(data.mlx, (void (*)(void *))sprite_hook, &data);
 	mlx_loop_hook(data.mlx, &player_movement_hook, &data);
 	mlx_loop_hook(data.mlx, (void (*)(void *))minimap_hook, &data);

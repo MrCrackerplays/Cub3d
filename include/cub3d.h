@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/16 16:05:57 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 16:33:34 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_ivector {
 }	t_iv;
 
 typedef struct s_ray {
-	t_fv	init_hit_pos;
+	t_fv	hit_pos_i;
 	t_fv	hit_pos;
 	t_iv	hit_wall_pos;
 	float	len;
@@ -86,6 +86,8 @@ typedef struct s_data {
 	t_fv		map_pos;
 	double		game_time;
 	t_ft_list	*sprites;
+	bool		bitmap[WIDTH][HEIGHT];
+	bool		bitmode;
 }	t_data;
 
 COLOR		ml_rgba(BYTE r, BYTE g, BYTE b, BYTE a);
@@ -96,9 +98,10 @@ BYTE		ml_color_b(COLOR rgba);
 BYTE		ml_color_a(COLOR rgba);
 COLOR		ml_color_darken(COLOR c, float darkness_mod);
 
-
 COLOR		ml_color_at(t_mlx_image *img, UINT x, UINT y);
 void		ml_draw_pixel(t_mlx_image *img, UINT x, UINT y, COLOR color);
+void		ml_draw_pixel_s(
+				t_data *data, t_mlx_image *img, t_iv pos, COLOR color);
 void		ml_draw_box(t_mlx_image *image, t_iv pos, t_iv size, COLOR color);
 void		ml_draw_line(t_mlx_image *image, t_iv p1, t_iv p2, COLOR color);
 

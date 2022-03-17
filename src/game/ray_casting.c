@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 20:39:44 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/16 16:09:00 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 16:30:40 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_ray	static_ray_with_face_hit(t_ray ray, t_iv dir, char func)
 		else
 			ray.pos_on_wall = ray.hit_pos.x - (int)ray.hit_pos.x;
 	}
-	ray.init_hit_pos = ray.hit_pos;
+	ray.hit_pos_i = ray.hit_pos;
 	return (ray);
 }
 

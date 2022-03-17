@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/12 19:21:56 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/16 14:56:11 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 16:31:56 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,17 @@ static void	draw_sprite2(
 	{
 		if ((trans_y > 0 && trans_y < data->rays[pos.x].eye_len))
 		{
-			pos.y = vecs[1].x;
+			pos.y = vecs[1].x - 1;
 			while (pos.y < vecs[1].y)
 			{
+				pos.y++;
+				if (data->bitmap[pos.x][pos.y + (int)data->player_ud_angle]
+					== data->bitmode)
+					continue ;
 				c = static_get_color_at(sprite, pos, vecs[2], ss_x);
 				if (c != 0)
-					ml_draw_pixel(data->screen,
-						pos.x, pos.y + data->player_ud_angle,
-						c);
-				pos.y++;
+					ml_draw_pixel_s(data, data->screen, (t_iv){
+						pos.x, pos.y + data->player_ud_angle}, c);
 			}
 		}
 		pos.x++;

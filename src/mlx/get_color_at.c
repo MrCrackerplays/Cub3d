@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/11 12:25:22 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/16 15:58:41 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/17 16:31:15 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ COLOR	ml_color_at(t_mlx_image *img, UINT x, UINT y)
 {
 	COLOR	*pixel;
 
-	
 	if (x >= img->width)
 		x = img->width - 1;
 	if (y >= img->height)
