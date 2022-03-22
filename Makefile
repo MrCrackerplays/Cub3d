@@ -144,14 +144,14 @@ $(LIBFT_FILE):
 
 clean:
 	@echo "[$(NAME)] cleaning $(NAME)"
-	#$(MAKE) clean -C ./$(LIBFT_FOLDER)
-	#$(MAKE) clean -C ./$(MINILIBX_FOLDER)
+	$(MAKE) clean -C ./$(LIBFT_FOLDER)
+	$(MAKE) clean -C ./$(MINILIBX_FOLDER)
 	@rm -rf $(OBJECT_DIR)
 
 fclean: clean
 	@echo "[$(NAME)] fully cleaning $(NAME)"
-	#$(MAKE) fclean -C ./$(LIBFT_FOLDER)
-	#$(MAKE) fclean -C ./$(MINILIBX_FOLDER)
+	$(MAKE) fclean -C ./$(LIBFT_FOLDER)
+	$(MAKE) fclean -C ./$(MINILIBX_FOLDER)
 	@rm -f $(NAME)
 	@rm -f $(BONUS_NAME)
 	@rm -rf obj
