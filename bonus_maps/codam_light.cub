@@ -1,21 +1,18 @@
-NO textures/CodamDarkNorth.png
-SO textures/CodamDarkSouth.png
-WE textures/CodamDarkWest.png
-EA textures/CodamDarkEast.png
+NO textures/CodamLightNorth.png
+SO textures/CodamLightSouth.png
+WE textures/CodamLightWest.png
+EA textures/CodamLightEast.png
 
-D0 textures/CodamBlacksmall.png
-D1 textures/CodamBlacksmall.png
-D2 textures/CodamBlacksmall.png
+D0 textures/CodamWhitesmall.png
+D1 textures/CodamWhitesmall.png
+D2 textures/CodamWhitesmall.png
 
-S0 textures/CodamCorinne.png
-S1 textures/CodamRoosP.png
-S2 textures/CodamBasile.png
+S0 textures/CodamWelmoed.png
+S1 textures/CodamRoosB.png
+S2 textures/CodamNicolas.png
 
-CI textures/CodamDarkFloor.png
-FI textures/CodamDarkCeiling.png
-
-C 64,128,192
-F 32,128,64
+CI textures/CodamLightFloor.png
+FI textures/CodamLightCeiling.png
 
         1111111111111111111111111
         1000000000110000000000001
