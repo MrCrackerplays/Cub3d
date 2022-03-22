@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/22 15:32:24 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/22 17:09:04 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	static_try_to_load(t_data *data, t_mlx_image **img, char *file_path)
 {
 	t_mlx_texture	*png_tex;
-	t_xpm			*xmp;
+	t_xpm			*xpm;
 
 	if (*img)
 		ft_exit_error("Reassigning of image.");
@@ -27,11 +27,11 @@ static void	static_try_to_load(t_data *data, t_mlx_image **img, char *file_path)
 		*img = mlx_texture_to_image(data->mlx, png_tex);
 		mlx_delete_texture(png_tex);
 	}
-	else if (ft_strcmp(file_path + ft_strlen(file_path) - 4, ".xmp") == 0)
+	else if (ft_strcmp(file_path + ft_strlen(file_path) - 4, ".xpm") == 0)
 	{
-		xmp = mlx_load_xpm42(file_path);
-		*img = mlx_texture_to_image(data->mlx, &(xmp->texture));
-		mlx_delete_xpm42(xmp);
+		xpm = mlx_load_xpm42(file_path);
+		*img = mlx_texture_to_image(data->mlx, &(xpm->texture));
+		mlx_delete_xpm42(xpm);
 	}
 	else
 		ft_exit_error("Wrong image file type.");
