@@ -124,15 +124,7 @@ obj/%.o: src/%.c $(HEADER_FILES)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJ_FLAGS) -c $< -o $@
 	@echo "[OK]"
 
-$(MINILIBX_FOLDER)/Makefile:
-	@echo "[$(NAME)] MLX42 not detected, cloning MLX42"
-	git clone -b Norme https://github.com/W2Codam/MLX42.git $(MINILIBX_FOLDER)
-
-$(MINILIBX_FILE): $(MINILIBX_FOLDER)/Makefile
-	@echo "[$(NAME)] pulling MLX42 updates"
-	cd $(MINILIBX_FOLDER)
-	git pull
-	cd ..
+$(MINILIBX_FILE):
 	@echo "[$(NAME)] compiling MLX42"
 	$(MAKE) -C ./$(MINILIBX_FOLDER)
 	@echo "[$(NAME)] finished compiling MLX42"
