@@ -14,9 +14,6 @@ S2 textures/Door2.png
 CI textures/wolftextures5.png
 FI textures/wolftextures6.png
 
-C 64,128,192
-F 32,128,64
-
 1111111111111
 1000000000001
 1000000000001

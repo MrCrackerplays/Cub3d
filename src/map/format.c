@@ -6,11 +6,12 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/17 16:58:47 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/22 15:32:24 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+#include "map.h"
 
 static void	static_try_to_load(t_data *data, t_mlx_image **img, char *file_path)
 {
@@ -28,7 +29,6 @@ static void	static_try_to_load(t_data *data, t_mlx_image **img, char *file_path)
 	}
 	else if (ft_strcmp(file_path + ft_strlen(file_path) - 4, ".xmp") == 0)
 	{
-		printf("trying to load xmp {%s}\n", file_path);
 		xmp = mlx_load_xpm42(file_path);
 		*img = mlx_texture_to_image(data->mlx, &(xmp->texture));
 		mlx_delete_xpm42(xmp);
@@ -105,28 +105,16 @@ static void	static_parse_thing(
 	free(des);
 }
 
-void	format_map(t_data *data, bool r, bool f)
+void	format_map(t_data *data)
 {
 	t_ft_hash_map	*texs;
+	bool			f;
+	bool			r;
 
-	texs = ft_hash_map_new(100);
-	ft_hash_map_set(texs, "NO ", &data->north);
-	ft_hash_map_set(texs, "SO ", &data->south);
-	ft_hash_map_set(texs, "EA ", &data->east);
-	ft_hash_map_set(texs, "WE ", &data->west);
-	ft_hash_map_set(texs, "D0 ", &data->door[0]);
-	ft_hash_map_set(texs, "D1 ", &data->door[1]);
-	ft_hash_map_set(texs, "D2 ", &data->door[2]);
-	ft_hash_map_set(texs, "S0 ", &data->sprite[0]);
-	ft_hash_map_set(texs, "S1 ", &data->sprite[1]);
-	ft_hash_map_set(texs, "S2 ", &data->sprite[2]);
-	ft_hash_map_set(texs, "CI ", &data->ceil_img);
-	ft_hash_map_set(texs, "FI ", &data->floor_img);
+	r = false;
+	f = false;
+	texs = format_init(data);
 	static_parse_thing(data, texs, &r, &f);
 	ft_hash_map_free(texs);
-	if (!r || !f || !data->north || !data->south || !data->west || !data->east
-		|| !data->door[0] || !data->door[1] || !data->door[2]
-		|| !data->sprite[0] || !data->sprite[1] || !data->sprite[2]
-		|| !data->ceil_img || !data->floor_img)
-		ft_exit_error("Invalid map.");
+	format_check(data, r, f);
 }

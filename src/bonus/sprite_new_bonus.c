@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sprite.h                                           :+:    :+:            */
+/*   sprite_new_bonus.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/03/12 19:22:23 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/12 19:22:54 by rdrazsky      ########   odam.nl         */
+/*   Created: 2022/03/08 18:23:25 by rdrazsky      #+#    #+#                 */
+/*   Updated: 2022/03/22 15:54:14 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPRITE_H
-# define SPRITE_H
+#include <cub3d_bonus.h>
 
-void	draw_sprite(t_data *data, t_sprite *sprite);
+t_sprite	*sprite_new(float x, float y)
+{
+	t_sprite	*sprite;
 
-#endif
+	sprite = ft_malloc(sizeof(t_sprite));
+	sprite->pos = (t_fv){x, y};
+	return (sprite);
+}

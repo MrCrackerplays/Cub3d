@@ -6,7 +6,7 @@
 #    By: rdrazsky <rdrazsky@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/04 13:52:48 by rdrazsky      #+#    #+#                  #
-#    Updated: 2022/03/03 15:57:40 by rdrazsky      ########   odam.nl          #
+#    Updated: 2022/03/18 15:44:12 by rdrazsky      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ $(NAME): $(OBJ)
 	@ar -rcs $(NAME) $(OBJ)
 
 %.o: %.c
-	@gcc $(FLAGS) -c $< -o $@ -I $(INCLUDE) $(DEBUG)
+	@gcc $(FLAGS) -c $< -o $@ -I $(INCLUDE)
 
 clean:
 	@rm -f $(OBJ)

@@ -11,11 +11,8 @@ S0 textures/CodamDavid.png
 S1 textures/CodamVictoria.png
 S2 textures/CodamRene.png
 
-CI textures/CodamFloorCeiling.png
-FI textures/CodamFloorCeiling.png
-
-C 64,128,192
-F 32,128,64
+CI textures/ea.png
+FI textures/so.png
 
         1111111111111111111111111
         1000000000110000000000001

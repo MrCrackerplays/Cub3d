@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ray_casting.c                                      :+:    :+:            */
+/*   ray_casting_bonus.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 20:39:44 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/22 15:53:58 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 static t_ray	static_ray_with_face_hit(t_ray ray, t_iv dir, char func)
 {
@@ -36,6 +36,7 @@ static t_ray	static_ray_with_face_hit(t_ray ray, t_iv dir, char func)
 		else
 			ray.pos_on_wall = ray.hit_pos.x - (int)ray.hit_pos.x;
 	}
+	ray.hit_pos_i = ray.hit_pos;
 	return (ray);
 }
 
@@ -99,8 +100,7 @@ static t_ray
 	return (static_ray_with_face_hit(ray, dir, 'y'));
 }
 
-static t_ray
-	static_cast_ray(t_data *data, float r_angle, t_fv pos)
+t_ray	cast_ray(t_data *data, float r_angle, t_fv pos, float mirror_len)
 {
 	t_ray	rays[2];
 	t_iv	dir;
@@ -119,6 +119,8 @@ static t_ray
 	rays[1] = static_ray_y(data, tanf(r_angle + M_PI_2), dir, pos);
 	if (rays[0].len > rays[1].len)
 		rays[0] = rays[1];
+	if (mirror_len > 0 && rays[0].wall_type == 'M')
+		rays[0] = mirror_hit(data, r_angle, rays[0], mirror_len);
 	rays[0].eye_len = rays[0].len * cosf(data->player_angle - r_angle);
 	if (!rays[0].wall_type)
 		rays[0].wall_face = '0';
@@ -136,7 +138,7 @@ void	ray_cast_hook(void *param)
 	{
 		r_angle = data->player_angle + ray_angle_fix(data, i);
 		data->rays[i]
-			= static_cast_ray(data, r_angle, data->player_pos);
+			= cast_ray(data, r_angle, data->player_pos, data->ray_depth);
 		i++;
 	}
 }

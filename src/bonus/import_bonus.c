@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   import.c                                           :+:    :+:            */
+/*   import_bonus.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:42:35 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/22 15:32:14 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 static void	static_remove_newlines(t_data *data)
 {
@@ -56,6 +56,15 @@ void	import_map(char *file_path, t_data *data)
 	data->south = NULL;
 	data->east = NULL;
 	data->west = NULL;
+	data->door[0] = NULL;
+	data->door[1] = NULL;
+	data->door[2] = NULL;
+	data->sprite[0] = NULL;
+	data->sprite[1] = NULL;
+	data->sprite[2] = NULL;
+	data->ceil_img = NULL;
+	data->floor_img = NULL;
+	data->sprites = ft_list_new();
 	format_map(data);
 	ft_list_add_front(data->map, ft_string_new(" "));
 	static_buffer_map(data);

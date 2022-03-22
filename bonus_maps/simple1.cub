@@ -1,0 +1,25 @@
+NO textures/wolftextures1.png
+SO    textures/wolftextures2.png
+WE   textures/wolftextures3.png
+EA            textures/wolftextures4.png
+
+D0 textures/Door0.png
+D1 textures/Door1.png
+D2 textures/Door2.png
+
+S0 textures/Sprite1.png
+S1 textures/Sprite2.png
+S2 textures/Sprite3.png
+
+CI textures/wolftextures5.png
+FI textures/wolftextures6.png
+
+1111111111111
+100C000001111
+100C000000111
+100C00000S0111111111111111111111111111111111111111
+1011000000000C000000000000000000000000000000000001
+10100001DDD111111111111111111111111111111111111111
+10D0001000001
+1110001000001
+1111111111111

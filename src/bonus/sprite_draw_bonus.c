@@ -6,11 +6,11 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/12 19:21:56 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/17 16:31:56 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 static COLOR	static_get_color_at(
 	t_sprite *sprite, t_iv pos, t_iv sprite_s, int ss_x)
@@ -100,11 +100,11 @@ void	draw_sprite(t_data *data, t_sprite *sprite)
 	trans_y = 1.0 / (data->plane.x * data->dir.y - data->dir.x * data->plane.y)
 		* (-data->plane.y * (sprite->pos.x - data->player_pos.x) + data->plane.x
 			* (sprite->pos.y - data->player_pos.y));
-	ss_x = (int)((WIDTH / 2) * (1
-				+ (1.0 / (data->plane.x * data->dir.y - data->dir.x
-						* data->plane.y) * (data->dir.y * (sprite->pos.x
-							- data->player_pos.x) - data->dir.x
-						* (sprite->pos.y - data->player_pos.y))) / trans_y));
+	ss_x = (WIDTH / 2) * (1
+			+ (1.0 / (data->plane.x * data->dir.y - data->dir.x * data->plane.y)
+				* (data->dir.y * (sprite->pos.x - data->player_pos.x)
+					- data->dir.x * (sprite->pos.y - data->player_pos.y)))
+			/ trans_y);
 	sprite_s.y = abs((int)(HEIGHT / (trans_y)));
 	sprite_s.x = sprite_s.y;
 	draw_sprite2(data, sprite, (t_iv [3]){

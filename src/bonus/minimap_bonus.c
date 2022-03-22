@@ -6,11 +6,11 @@
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/19 18:55:48 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/17 16:30:40 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 static void	static_draw_wall(t_data *data, t_iv cor, char type)
 {

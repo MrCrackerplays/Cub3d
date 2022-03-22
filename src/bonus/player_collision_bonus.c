@@ -6,11 +6,11 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/16 15:38:43 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/16 15:52:34 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 void	player_collision_correction(t_data *data)
 {

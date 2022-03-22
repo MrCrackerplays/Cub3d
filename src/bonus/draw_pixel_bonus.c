@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_pixel.c                                       :+:    :+:            */
+/*   draw_pixel_bonus.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rdrazsky <rdrazsky@codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/21 19:29:36 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/22 15:30:28 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/22 15:37:39 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
-void	ml_draw_pixel(t_mlx_image *img, UINT x, UINT y, COLOR color)
+void	ml_draw_pixel_s(t_data *data, t_mlx_image *img, t_iv pos, COLOR color)
 {
 	COLOR	*pixel;
 
-	if (x >= img->width || y >= img->height)
+	if ((UINT)pos.x >= img->width || (UINT)pos.y >= img->height)
 		return ;
-	pixel = (COLOR *)&img->pixels[(x + y * img->width) * sizeof(COLOR)];
+	if (data->bitmap[pos.x][pos.y] == data->bitmode)
+		return ;
+	data->bitmap[pos.x][pos.y] = data->bitmode;
+	pixel = (COLOR *)&img->pixels[(pos.x + pos.y * img->width) * sizeof(COLOR)];
 	*pixel = color;
 }

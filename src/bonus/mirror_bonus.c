@@ -6,11 +6,11 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/02 13:45:55 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/17 16:30:40 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 static float	static_new_angle(t_ray ray, float r_angle)
 {

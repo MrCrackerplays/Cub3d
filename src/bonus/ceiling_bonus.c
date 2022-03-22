@@ -6,11 +6,11 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/03 15:53:43 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/17 12:46:01 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include <cub3d_bonus.h>
 
 static COLOR	darken(COLOR c, float distance)
 {
