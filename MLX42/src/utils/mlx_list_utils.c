@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   mlx_list_utils.c                                   :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
+/*   By: lde-la-h <lde-la-h@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/31 15:20:51 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/03/01 13:09:03 by lde-la-h      ########   odam.nl         */
+/*   Created: 2022/01/31 15:20:51 by lde-la-h      #+#    #+#                 */
+/*   Updated: 2022/02/17 11:52:25 by lde-la-h      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,26 @@ void	mlx_lstadd_front(t_mlx_list **lst, t_mlx_list *new)
 t_mlx_list	*mlx_lstremove(t_mlx_list **lst, void *value, \
 bool (*comp)(void *, void*))
 {
-	t_mlx_list	*lstcpy;
+	t_mlx_list		*temp;
+	t_mlx_list		*prev;
 
-	lstcpy = *lst;
-	while (lstcpy && !comp(lstcpy->content, value))
-		lstcpy = lstcpy->next;
-	if (lstcpy == NULL)
+	temp = *lst;
+	if (temp != NULL && comp(temp->content, value))
+	{
+		*lst = temp->next;
+		temp->prev = NULL;
+		temp->next = NULL;
+		return (temp);
+	}
+	while (temp && !comp(temp->content, value))
+	{
+		prev = temp->prev;
+		temp = temp->next;
+	}
+	if (!temp)
 		return (NULL);
-	if (lstcpy == *lst)
-		*lst = lstcpy->next;
-	if (lstcpy->next != NULL)
-		lstcpy->next->prev = lstcpy->prev;
-	if (lstcpy->prev != NULL)
-		lstcpy->prev->next = lstcpy->next;
-	return (lstcpy);
+	prev->next = temp->next;
+	temp->next = NULL;
+	temp->prev = NULL;
+	return (temp);
 }

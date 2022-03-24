@@ -53,7 +53,7 @@ In the very end a library is generated, compile your program with this library!
 ➜  ~ git clone https://github.com/W2Codam/MLX42.git
 ```
 
-### Via [Homebrew](https://brew.sh/) / [Homebrew42](https://github.com/kube/42homebrew) by building from source.
+### Via Homebrew / Homebrew42 by building from source.
 
 2. Install GLFW
 ```bash
@@ -139,7 +139,10 @@ NOTE: For arch-linux you might also have to do ```sudo apt-get install glfw-x11`
 
 The systems below have not been tested yet.
 
-### For Windows:
+### For Windows: (Partial Support)
+
+Windows, while entirely possible to compile and run, is not fully supported due to compilation difficulty and it being a bit of a hassle.
+As of now the build script for windows does not exist fully, compile by adding every c file manually or install cygwin and then 'make' will work.
 
 1. Download & Install MinGW: [Here!](https://sourceforge.net/projects/mingw/)
 

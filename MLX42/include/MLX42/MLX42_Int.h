@@ -6,7 +6,7 @@
 /*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/27 23:55:34 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/03/01 17:55:09 by lde-la-h      ########   odam.nl         */
+/*   Updated: 2022/02/22 15:34:12 by W2Wizard      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,26 @@
 #  include <limits.h>
 # endif
 # if defined(_WIN32)
-#  include <malloc.h> /* alloca */
+#  include <malloc.h>
 # endif
-# include <ctype.h> /* isspace, isprint, ... */
-# include <string.h> /* strlen, memmove, ... */
-# include <stdarg.h> /* va_arg, va_end, ... */
+# include <ctype.h>
+# include <string.h>
+# include <stdarg.h>
 # ifndef MLX_SWAP_INTERVAL
 #  define MLX_SWAP_INTERVAL 1
 # endif
+# define MLX_INVALID_FILE_EXT "Invalid file extension!"
+# define MLX_INVALID_FILE "Failed to read file!"
+# define MLX_INVALID_ARG "Invalid argument provided!"
+# define MLX_NULL_ARG "NULL argument exception!"
+# define MLX_SHADER_FAILURE "Shader failure!"
+# define MLX_RENDER_FAILURE "Failed to initialize Renderer!"
+# define MLX_MEMORY_FAIL "Failed to allocate enough memory!"
+# define MLX_XPM_FAILURE "Failed to read XPM42 file!"
+# define GLFW_INIT_FAILURE "Failed to initialize GLFW!"
+# define GLFW_WIN_FAILURE "Failed to create GLFW Window!"
+# define GLFW_GLAD_FAILURE "Failed to initialize GLAD!"
+// TODO: Switch to error codes instead.
 
 /**
  * The shader code is extracted from the shader files
@@ -61,6 +73,20 @@ extern const char	*g_frag_shader;
 
 //= Types =//
 
+/**
+ * Various log types to give different verbose types of feedback.
+ * 
+ * @param MLX_INFO Info is for simple feedback
+ * @param MLX_WARNING Something happened that shouldn't have.
+ * @param MLX_INFO Critical error.
+ */
+typedef enum e_logtype
+{
+	MLX_INFO,
+	MLX_WARNING,
+	MLX_ERROR,
+}	t_logtype;
+
 // A single vertex, identical to the layout in the shader.
 typedef struct s_vert
 {
@@ -71,6 +97,13 @@ typedef struct s_vert
 	float	v;
 }	t_vert;
 
+// Hook layout used to add generic loop hooks.
+typedef struct s_mlx_hook
+{
+	void	*param;
+	void	(*func)(void*);
+}	t_mlx_hook;
+
 // Layout for linked list.
 typedef struct s_mlx_list
 {
@@ -79,75 +112,14 @@ typedef struct s_mlx_list
 	struct s_mlx_list	*prev;
 }	t_mlx_list;
 
-//= Hook structs =//
-/**
- * There are 2 types of hooks, special and generics.
- * 
- * Specials: Are specific callback functions to a specific action
- * such as window resizing or key presses. These are attached to the
- * callbacks of glfw. In case MLX itself needs the callback we call
- * the specials in that callback since there can only ever be a single
- * callback.
- * 
- * Generics: Generics are MLX42 specific hooks and can have multiple
- * hooks at the same time, these are executed every frame and can be
- * used as an alternative for key presses or animations for instance.
- * 
- * NOTE: Hooks could be achieved with va_args to have any amount
- * of args sized functor but we can't/don't want to let the user
- * deal with va_args and having to look up what args are what, etc...
- * 
- * We want to keep it straight forward with functors already describing
- * what params they have.
- */
-
-typedef struct s_mlx_srcoll
+// To maintain the drawing order we add every instance to a queue.
+typedef struct s_draw_queue
 {
-	void				*param;
-	t_mlx_scrollfunc	func;
-}	t_mlx_scroll;
+	t_mlx_image	*image;
+	int32_t		instanceid;
+}	t_draw_queue;
 
-typedef struct s_mlx_close
-{
-	void				*param;
-	t_mlx_closefunc		func;
-}	t_mlx_close;
-
-typedef struct s_mlx_resize
-{
-	void				*param;
-	t_mlx_resizefunc	func;
-}	t_mlx_resize;
-
-typedef struct s_mlx_key
-{
-	void				*param;
-	t_mlx_keyfunc		func;
-}	t_mlx_key;
-
-typedef struct s_mlx_hook
-{
-	void	*param;
-	void	(*func)(void*);
-}	t_mlx_hook;
-
-//= Rendering =//
-/**
- * For rendering we need to store most of OpenGLs stuff
- * such as the vertex array object, vertex buffer object &
- * the shader program. As well as hooks and the zdepth level.
- * 
- * Additionally we represent draw calls with a linked list
- * queue that point to the image and the index of which instance.
- * Again, instances only carry xyz data so coupled with the image it
- * lets us know which image and where to draw a copy.
- * 
- * Texture contexts are kept in a struct purely for convience of
- * expanding the variables in potential later updates. As well as
- * having had more variables before now just one.
- */
-
-// MLX instance context.
+// MLX Instance handle context used for OpenGL stuff.
 typedef struct s_mlx_ctx
 {
 	GLuint				vao;
@@ -156,31 +128,20 @@ typedef struct s_mlx_ctx
 	t_mlx_list			*hooks;
 	t_mlx_list			*images;
 	t_mlx_list			*render_queue;
-	t_mlx_scroll		scroll_hook;
-	t_mlx_key			key_hook;
-	t_mlx_resize		resize_hook;
-	t_mlx_close			close_hook;
+	t_mlx_scrollfunc	scroll_hook;
+	t_mlx_keyfunc		key_hook;
+	t_mlx_resizefunc	resize_hook;
+	t_mlx_closefunc		close_hook;
+	t_mlx_image			*char_images[94];
 	int32_t				zdepth;
 }	t_mlx_ctx;
 
-// Draw call queue entry.
-typedef struct s_draw_queue
-{
-	t_mlx_image	*image;
-	int32_t		instanceid;
-}	t_draw_queue;
-
-// Image context.
+// Additional OpenGL information for images/textures.
 typedef struct s_mlx_image_ctx
 {
+	t_vert	vertices[6];
 	GLuint	texture;
 }	t_mlx_image_ctx;
-
-//= Functions =//
-/**
- * All sorts of internal functions shared in the library that
- * should not be accessible to the user! No touch!
- */
 
 //= Linked List Functions =//
 
@@ -195,9 +156,9 @@ bool (*comp)(void *, void*));
 
 //= Misc functions =//
 
-void		mlx_xpm_putpixel(t_xpm *xpm, int32_t x, int32_t y, uint32_t color);
 bool		mlx_equal_image(void *lstcontent, void *value);
 bool		mlx_equal_inst(void *lstcontent, void *value);
+void		mlx_xpm_putpixel(t_xpm *xpm, int32_t x, int32_t y, uint32_t color);
 bool		mlx_insert_xpm_entry(t_xpm *xpm, char *line, uint32_t *ctable, \
 size_t s);
 uint32_t	mlx_grab_xpm_pixel(char *pixelstart, uint32_t *ctable, \
@@ -205,15 +166,19 @@ t_xpm *xpm, size_t s);
 
 //= Error/log Handling Functions =//
 
-bool		mlx_error(t_mlx_errno val);
+bool		mlx_log(const t_logtype type, const char *msg);
 bool		mlx_freen(int32_t count, ...);
+
+//= IO Functions =//
+
+char		*mlx_readfile(const char *FilePath);
 
 //= OpenGL Functions =//
 
-void		mlx_on_resize(GLFWwindow *window, int32_t width, int32_t height);
 bool		mlx_init_shaders(t_mlx *mlx, uint32_t *shaders);
 bool		mlx_compile_shader(const char *code, int32_t type, uint32_t *out);
-void		mlx_draw_instance(t_mlx_image *img, t_mlx_inst *instance);
+void		mlx_draw_instance(t_mlx *mlx, t_mlx_image *img, \
+t_mlx_instance *instance);
 
 // Utils Functions =//
 

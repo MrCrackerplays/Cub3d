@@ -6,7 +6,7 @@
 /*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/28 02:43:22 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/03/01 17:59:21 by lde-la-h      ########   odam.nl         */
+/*   Updated: 2022/02/19 23:54:50 by w2wizard      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	mlx_close_window(t_mlx *mlx)
 {
 	if (!mlx)
 	{
-		mlx_error(MLX_NULLARG);
+		mlx_log(MLX_WARNING, MLX_NULL_ARG);
 		return ;
 	}
 	glfwSetWindowShouldClose(mlx->window, true);
@@ -40,11 +40,13 @@ void	mlx_terminate(t_mlx *mlx)
 
 	if (!mlx)
 	{
-		mlx_error(MLX_NULLARG);
+		mlx_log(MLX_WARNING, MLX_NULL_ARG);
 		return ;
 	}
-	glfwTerminate();
+	if (!glfwWindowShouldClose(mlx->window))
+		glfwSetWindowShouldClose(mlx->window, true);
 	mlxctx = mlx->context;
+	glfwTerminate();
 	mlx_lstclear((t_mlx_list **)(&mlxctx->hooks), &free);
 	mlx_lstclear((t_mlx_list **)(&mlxctx->render_queue), &free);
 	mlx_lstclear((t_mlx_list **)(&mlxctx->images), &mlx_free_imagedata);

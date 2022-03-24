@@ -6,7 +6,7 @@
 /*   By: W2Wizard <w2.wizzard@gmail.com>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/28 00:24:30 by W2Wizard      #+#    #+#                 */
-/*   Updated: 2022/02/28 20:52:09 by lde-la-h      ########   odam.nl         */
+/*   Updated: 2022/02/22 15:35:20 by W2Wizard      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static bool	mlx_create_buffers(t_mlx *mlx)
 
 	context = mlx->context;
 	context->zdepth = 0;
-	glActiveTexture(GL_TEXTURE0);
-	glGenVertexArrays(1, &(context->vao));
 	glGenVertexArrays(1, &(context->vao));
 	glGenBuffers(1, &(context->vbo));
 	glBindVertexArray(context->vao);
@@ -38,28 +36,28 @@ static bool	mlx_create_buffers(t_mlx *mlx)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glUniform1i(glGetUniformLocation(context->shaderprogram, "OutTexture"), 0);
-	glfwSetWindowSizeCallback(mlx->window, &mlx_on_resize);
-	mlx_on_resize(mlx->window, mlx->width, mlx->height);
+	if (!mlx_parse_font_atlas(mlx))
+		return (false);
 	return (true);
 }
 
+// TODO: Fix relative to absolute, in some cases fopen just fails on some OS.
 static bool	mlx_init_render(t_mlx *mlx)
 {
 	uint32_t	s[3];
 
 	if (!mlx->window)
-		return (mlx_error(MLX_WINFAIL));
+		return (mlx_log(MLX_ERROR, GLFW_WIN_FAILURE));
 	glfwMakeContextCurrent(mlx->window);
 	glfwSetFramebufferSizeCallback(mlx->window, framebuffer_callback);
 	glfwSetWindowUserPointer(mlx->window, mlx);
 	glfwSwapInterval(MLX_SWAP_INTERVAL);
 	{
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-			return (mlx_error(MLX_GLADFAIL));
+			return (mlx_log(MLX_ERROR, GLFW_GLAD_FAILURE));
 		if (!mlx_compile_shader(g_vert_shader, GL_VERTEX_SHADER, &s[0]) || \
 			!mlx_compile_shader(g_frag_shader, GL_FRAGMENT_SHADER, &s[1]))
-			return (false);
+			return (mlx_log(MLX_ERROR, MLX_SHADER_FAILURE));
 	}
 	s[2] = 0;
 	if (!mlx_init_shaders(mlx, s))
@@ -75,10 +73,12 @@ t_mlx	*mlx_init(int32_t Width, int32_t Height, const char *Title, bool Resize)
 	t_mlx		*mlx;
 	const bool	init = glfwInit();
 
-	g_mlx_errno = 0;
 	mlx = calloc(1, sizeof(t_mlx));
 	if (!mlx || !init)
-		return (free(mlx), (void *)mlx_error(MLX_GLFWFAIL));
+	{
+		free(mlx);
+		return ((void *)mlx_log(MLX_ERROR, GLFW_INIT_FAILURE));
+	}
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -91,8 +91,8 @@ t_mlx	*mlx_init(int32_t Width, int32_t Height, const char *Title, bool Resize)
 	mlx->context = calloc(1, sizeof(t_mlx_ctx));
 	if (!mlx->context || !mlx_init_render(mlx))
 	{
-		mlx_terminate(mlx);
-		return (NULL);
+		free(mlx);
+		return ((void *)mlx_log(MLX_ERROR, MLX_RENDER_FAILURE));
 	}
 	return (mlx);
 }
