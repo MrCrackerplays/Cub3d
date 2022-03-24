@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/22 16:11:29 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/24 17:51:42 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	map_hook(t_data *data)
 		texture = decide_image(data, data->rays[i]);
 		if (!texture)
 			continue ;
-		height = fminf(fabsf(HEIGHT / data->rays[i].eye_len), 10000000) + 2;
+		height = fminf(fabsf(HEIGHT / data->rays[i].eye_len), 10000000) + 1;
 		texel_step = ((float)texture->height) / height;
 		darkness_mod
 			= 1.0 / fminf(15.0, fmaxf(1.0, 0.25 * (data->rays[i].len)));

@@ -11,8 +11,8 @@ S0 textures/CodamCorinne.png
 S1 textures/CodamRoosP.png
 S2 textures/CodamBasile.png
 
-CI textures/CodamDarkFloor.png
-FI textures/CodamDarkCeiling.png
+FI textures/CodamDarkFloor2.png
+CI textures/CodamDarkCeiling.png
 
         1111111111111111111111111
         1000000000110000000000001
