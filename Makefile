@@ -6,37 +6,6 @@ MINILIBX_FILE ?= $(MINILIBX_FOLDER)/libmlx42.a
 LIBFT_FOLDER ?= libft
 LIBFT_FILE ?= $(LIBFT_FOLDER)/libft.a
 
-# OBJECTS := \
-# 	game/init.o \
-# 	game/main_bonus.o \
-# 	game/map_rendering.o \
-# 	game/minimap_bonus.o \
-# 	game/player_bonus.o \
-# 	game/player_collision_bonus.o \
-# 	game/ray_casting.o \
-# 	game/mirror_bonus.o \
-# 	game/ceiling_bonus.o \
-# 	game/sprite_bonus.o \
-# 	game/sprite_draw_bonus.o \
-# 	mlx/color.o \
-# 	mlx/color_info.o \
-# 	mlx/draw_box.o \
-# 	mlx/draw_line.o \
-# 	mlx/draw_pixel.o \
-# 	mlx/get_color_at.o \
-# 	utils/find_angle.o \
-# 	utils/wall_types.o \
-# 	utils/skip_space.o \
-# 	utils/test_access.o \
-# 	utils/sprite_new.o \
-# 	utils/ray_angle_fix.o \
-# 	map/get_at.o \
-# 	map/format.o \
-# 	map/format_u_bonus.o \
-# 	map/import.o \
-# 	map/validate.o \
-# 	map/populate_bonus.o
-
 OBJECTS := \
 	mlx/color.o \
 	mlx/color_info.o \
@@ -97,8 +66,7 @@ INCLUDE := $(addprefix -I,$(INCLUDE))
 
 CFLAGS ?= -Wall -Werror -Wextra
 ifdef DEBUG
-# CFLAGS := -g $(CFLAGS) -D DEBUG
-CFLAGS := -D DEBUG
+CFLAGS := -g $(CFLAGS) -D DEBUG
 endif
 
 OBJ_FLAGS := -O3
@@ -114,12 +82,12 @@ endif
 all: $(NAME)
 
 $(NAME): $(MINILIBX_FILE) $(LIBFT_FILE) $(OBJECTS)
-	@/bin/echo -n "[$(NAME)] compiling $(NAME)... "
+	@echo -n "[$(NAME)] compiling $(NAME)... "
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FILE) $(MINILIBX_FILE) -o $(NAME) $(MLX_FLAGS)
 	@echo "[OK]"
 
 obj/%.o: src/%.c $(HEADER_FILES)
-	@/bin/echo -n "[$(NAME)] compiling $@... "
+	@echo -n "[$(NAME)] compiling $@... "
 	@mkdir -p $(OBJECT_DIRS)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJ_FLAGS) -c $< -o $@
 	@echo "[OK]"
@@ -163,10 +131,5 @@ runb: bonus
 
 debug:
 	$(MAKE) DEBUG=1
-
-runl: $(MINILIBX_FILE) $(LIBFT_FILE)
-	gcc \
-		src/game/* src/map/* src/mlx/* src/utils/* \
-		libft/libft.a MLX42/libmlx42.a -ldl -lglfw -lm -I include -I libft/include -I MLX42/include
 
 .PHONY: all clean fclean re bonus run runb debug
