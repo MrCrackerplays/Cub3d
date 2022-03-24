@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 17:53:15 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/18 16:16:13 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/24 16:36:24 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	validate_map(t_data *data)
 	pos.y = 0;
 	while (pos.y < data->map->len - 1)
 	{
+		if (((t_ft_string *)ft_list_item_at(data->map, pos.y))->text[1] == '\0')
+			ft_exit_error("Invalid map.7");
 		pos.x = 0;
 		while ((UINT)pos.x
 			< ((t_ft_string *)ft_list_item_at(data->map, pos.y))->len)
