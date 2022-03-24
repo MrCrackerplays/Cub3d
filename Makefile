@@ -1,3 +1,5 @@
+SHELL = bash
+
 BONUS_NAME = cub3d_bonus
 
 MINILIBX_FOLDER ?= MLX42
