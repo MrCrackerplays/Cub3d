@@ -6,7 +6,7 @@
 /*   By: pdruart <pdruart@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:44:11 by pdruart       #+#    #+#                 */
-/*   Updated: 2022/03/24 17:51:42 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/25 12:59:49 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	static_draw_line(
 		j = fmaxf((height - HEIGHT) / 2 - data->player_ud_angle, 0);
 	else
 		j = 0;
-	while (j < height && data->player_ud_angle
-		+ j + (HEIGHT - height) / 2 < HEIGHT)
+	while (j < height && data->player_ud_angle + j + (HEIGHT - height) / 2
+		< HEIGHT && data->player_ud_angle + j + (HEIGHT + height) / 2 > 0)
 	{
 		c = ml_color_at(texture, texture->width
 				* (data->rays[i].pos_on_wall), j * texel_step);
