@@ -6,7 +6,7 @@
 /*   By: lde-la-h <lde-la-h@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/09 14:00:50 by lde-la-h      #+#    #+#                 */
-/*   Updated: 2022/02/21 11:14:14 by lde-la-h      ########   odam.nl         */
+/*   Updated: 2022/03/25 12:45:19 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void	mlx_delete_xpm42(t_xpm *xpm)
 		mlx_log(MLX_WARNING, MLX_NULL_ARG);
 		return ;
 	}
-	mlx_delete_texture(&xpm->texture);
+	free(xpm->texture.pixels);
 	free(xpm);
 }

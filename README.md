@@ -41,7 +41,7 @@ Definitions have an identifier followed by at least 1 space and then their defin
 A Map is a tiled grid using characters that's always enclosed such that only walls are touching spaces/the outside. A map always has exactly 1 player spawn position.
 
 `<file>`
-: path to texture (`.png` or `.xpm` ([XPM42](https://github.com/W2Codam/MLX42#custom-xpm-xpm42-format))) relative to the executeable.
+: path to texture (`.png` or `.xpm42` ([XPM42](https://github.com/W2Codam/MLX42#custom-xpm-xpm42-format))) relative to the executeable.
 
 `<color>`
 : RGB color described as `R,G,B`.

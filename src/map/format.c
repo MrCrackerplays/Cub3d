@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/22 17:09:04 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/25 12:51:54 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	static_try_to_load(t_data *data, t_mlx_image **img, char *file_path)
 		*img = mlx_texture_to_image(data->mlx, png_tex);
 		mlx_delete_texture(png_tex);
 	}
-	else if (ft_strcmp(file_path + ft_strlen(file_path) - 4, ".xpm") == 0)
+	else if (ft_strcmp(file_path + ft_strlen(file_path) - 6, ".xpm42") == 0)
 	{
 		xpm = mlx_load_xpm42(file_path);
 		*img = mlx_texture_to_image(data->mlx, &(xpm->texture));
