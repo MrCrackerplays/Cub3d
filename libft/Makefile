@@ -6,7 +6,7 @@
 #    By: rdrazsky <rdrazsky@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/10/04 13:52:48 by rdrazsky      #+#    #+#                  #
-#    Updated: 2022/03/18 15:44:12 by rdrazsky      ########   odam.nl          #
+#    Updated: 2022/03/25 16:27:29 by rdrazsky      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,13 +93,27 @@ FILES = \
 SRC = $(foreach i, $(FILES), $(i).c)
 OBJ = $(foreach i, $(FILES), $(i).o)
 
+# //= Colors =// #
+BOLD	= \033[1m
+BLACK	= \033[30;1m
+RED		= \033[31;1m
+GREEN	= \033[32;1m
+YELLOW	= \033[33;1m
+BLUE	= \033[34;1m
+MAGENTA	= \033[35;1m
+CYAN	= \033[36;1m
+WHITE	= \033[37;1m
+RESET	= \033[0m
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@ar -rcs $(NAME) $(OBJ)
 
 %.o: %.c
+	@printf "$(CYAN)$(BOLD)\r[libft] Compiling: $(RESET)$(BOLD)$(notdir $<)"
 	@gcc $(FLAGS) -c $< -o $@ -I $(INCLUDE)
+	@printf "\r\e[45C$(GREEN)[OK]\n$(RESET)"
 
 clean:
 	@rm -f $(OBJ)

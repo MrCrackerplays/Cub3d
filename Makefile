@@ -81,6 +81,18 @@ else
 MLX_FLAGS := -ldl -lglfw -lm
 endif
 
+# //= Colors =// #
+BOLD	= \033[1m
+BLACK	= \033[30;1m
+RED		= \033[31;1m
+GREEN	= \033[32;1m
+YELLOW	= \033[33;1m
+BLUE	= \033[34;1m
+MAGENTA	= \033[35;1m
+CYAN	= \033[36;1m
+WHITE	= \033[37;1m
+RESET	= \033[0m
+
 all: $(NAME)
 
 $(NAME): $(MINILIBX_FILE) $(LIBFT_FILE) $(OBJECTS)
@@ -89,10 +101,10 @@ $(NAME): $(MINILIBX_FILE) $(LIBFT_FILE) $(OBJECTS)
 	@echo "[OK]"
 
 obj/%.o: src/%.c $(HEADER_FILES)
-	@echo -n "[$(NAME)] compiling $@... "
+	@printf "\r[$(NAME)] Compiling: $(RESET)$(BOLD)$(notdir $<)"
 	@mkdir -p $(OBJECT_DIRS)
 	@$(CC) $(CFLAGS) $(INCLUDE) $(OBJ_FLAGS) -c $< -o $@
-	@echo "[OK]"
+	@printf "\r\e[50C$(GREEN)[OK]\n$(RESET)"
 
 $(MINILIBX_FILE):
 	@echo "[$(NAME)] compiling MLX42"
@@ -131,7 +143,9 @@ runb: bonus
 	@echo "[$(BONUS_NAME)] running $(BONUS_NAME)"
 	./$(BONUS_NAME) bonus_maps/simple1.cub
 
+run_bonus: runb
+
 debug:
 	$(MAKE) DEBUG=1
 
-.PHONY: all clean fclean re bonus run runb debug
+.PHONY: all clean fclean re bonus run runb run_bonus debug

@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/22 16:20:59 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/25 16:11:40 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,7 @@
 # define __USE_MISC
 # include <math.h>
 
-# define COLOR unsigned int
-
-# define MOVE_SPEED .05
-# define ROT_SPEED .05
-# define WIDTH 1280
-# define HEIGHT 720
+# include "cub_macros.h"
 
 typedef struct s_fvector {
 	float	x;
