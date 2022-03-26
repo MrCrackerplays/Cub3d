@@ -7,9 +7,9 @@ D0 textures/CodamBlacksmall.png
 D1 textures/CodamBlacksmall.png
 D2 textures/CodamBlacksmall.png
 
-S0 textures/CodamDavid.png
-S1 textures/CodamVictoria.png
-S2 textures/CodamRene.png
+S0 textures/CodamCorinne.png
+S1 textures/CodamRoosP.png
+S2 textures/CodamBasile.png
 
 CI textures/CodamFloorCeiling.png
 FI textures/CodamFloorCeiling.png
