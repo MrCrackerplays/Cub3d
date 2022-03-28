@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:34:12 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/28 14:00:01 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ static void	static_main_hook(void *param)
 	data->game_time += data->mlx->delta_time;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
-	if (data->ray_depth > 2 && mlx_is_key_down(data->mlx, MLX_KEY_KP_SUBTRACT))
-		data->ray_depth--;
-	if (data->ray_depth < 200 && mlx_is_key_down(data->mlx, MLX_KEY_KP_ADD))
-		data->ray_depth++;
-	ft_print(1, "\x1b[A{ FPS: %i }\n", (int)(1 / data->mlx->delta_time));
 }
 
 int32_t	main(int argc, char **argv)
