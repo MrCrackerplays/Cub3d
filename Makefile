@@ -9,6 +9,9 @@ LIBFT_FOLDER ?= libft
 LIBFT_FILE ?= $(LIBFT_FOLDER)/libft.a
 
 OBJECTS := \
+	map/format.o \
+	map/get_at.o \
+	map/validate.o \
 	mlx/color.o \
 	mlx/color_info.o \
 	mlx/draw_box.o \
@@ -16,52 +19,50 @@ OBJECTS := \
 	mlx/draw_pixel.o \
 	mlx/get_color_at.o \
 	utils/find_angle.o \
-	utils/skip_space.o \
-	utils/test_access.o \
 	utils/ray_angle_fix.o \
-	map/get_at.o \
-	map/format.o \
-	map/validate.o
+	utils/skip_space.o \
+	utils/test_access.o
 
 ifdef BONUS
 NAME := $(BONUS_NAME)
-HEADER_FILES := cub3d_bonus.h map_bonus.h sprite_bonus.h
+HEADER_FILES := cub3d_bonus.h
 OBJECTS := ${OBJECTS} \
-	bonus/wall_types_bonus.o \
-	bonus/sprite_new_bonus.o \
-	bonus/draw_pixel_bonus.o \
-	bonus/minimap_bonus.o \
-	bonus/player_collision_bonus.o \
-	bonus/ceiling_bonus.o \
-	bonus/sprite_bonus.o \
-	bonus/sprite_draw_bonus.o \
-	bonus/mirror_bonus.o \
-	bonus/ray_casting_bonus.o \
-	bonus/map_rendering_bonus.o \
-	bonus/main_bonus.o \
-	bonus/init_bonus.o \
-	bonus/player_bonus.o \
-	bonus/import_bonus.o \
-	bonus/format_u_bonus.o \
-	bonus/populate_bonus.o
+	bonus/game/ceiling_bonus.o \
+	bonus/game/init_bonus.o \
+	bonus/game/main_bonus.o \
+	bonus/game/map_rendering_bonus.o \
+	bonus/game/minimap_bonus.o \
+	bonus/game/mirror_bonus.o \
+	bonus/game/sprite_bonus.o \
+	bonus/game/player_collision_bonus.o \
+	bonus/game/player_bonus.o \
+	bonus/game/ray_casting_bonus.o \
+	bonus/game/sprite_draw_bonus.o \
+	bonus/game/sprite_new_bonus.o \
+	bonus/map/format_u_bonus.o \
+	bonus/map/import_bonus.o \
+	bonus/map/populate_bonus.o \
+	bonus/mlx/draw_pixel_bonus.o \
+	bonus/utils/wall_types_bonus.o
 else
 NAME := cub3d
-HEADER_FILES := cub3d.h map.h
+HEADER_FILES := cub3d.h
 OBJECTS := ${OBJECTS} \
-	utils/wall_types.o \
-	game/ray_casting.o \
-	game/map_rendering.o \
-	game/main.o \
 	game/init.o \
+	game/main.o \
+	game/map_rendering.o \
 	game/player.o \
-	map/import.o \
+	game/ray_casting.o \
 	map/format_u.o \
-	map/populate.o
+	map/import.o \
+	map/populate.o \
+	utils/wall_types.o
 endif
 
 OBJECT_DIR := obj
 OBJECTS := $(addprefix $(OBJECT_DIR)/,$(OBJECTS))
-OBJECT_DIRS := map mlx utils game bonus
+OBJECT_DIRS := map mlx utils game
+OBJECT_DIRS := $(OBJECT_DIRS) $(addprefix bonus/,$(OBJECT_DIRS))
 OBJECT_DIRS := $(addprefix $(OBJECT_DIR)/,$(OBJECT_DIRS))
 HEADER_FILES := $(HEADER_FILES) cub_macros.h
 HEADER_FILES := $(addprefix include/,$(HEADER_FILES))
