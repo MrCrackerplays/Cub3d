@@ -25,6 +25,7 @@ OBJECTS := \
 
 ifdef BONUS
 NAME := $(BONUS_NAME)
+HEADER_FILES := cub3d_bonus.h map_bonus.h sprite_bonus.h
 OBJECTS := ${OBJECTS} \
 	bonus/wall_types_bonus.o \
 	bonus/sprite_new_bonus.o \
@@ -45,6 +46,7 @@ OBJECTS := ${OBJECTS} \
 	bonus/populate_bonus.o
 else
 NAME := cub3d
+HEADER_FILES := cub3d.h map.h
 OBJECTS := ${OBJECTS} \
 	utils/wall_types.o \
 	game/ray_casting.o \
@@ -61,7 +63,7 @@ OBJECT_DIR := obj
 OBJECTS := $(addprefix $(OBJECT_DIR)/,$(OBJECTS))
 OBJECT_DIRS := map mlx utils game bonus
 OBJECT_DIRS := $(addprefix $(OBJECT_DIR)/,$(OBJECT_DIRS))
-HEADER_FILES := cub3d.h
+HEADER_FILES := $(HEADER_FILES) cub_macros.h
 HEADER_FILES := $(addprefix include/,$(HEADER_FILES))
 INCLUDE := include libft/include $(MINILIBX_FOLDER)/include
 INCLUDE := $(addprefix -I,$(INCLUDE))

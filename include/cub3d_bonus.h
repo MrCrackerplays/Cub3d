@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/25 16:11:37 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/28 13:55:09 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,12 @@ void		sprite_hook(t_data *data);
 char		map_get_at(t_ft_list *map, UINT x, UINT y);
 
 char		is_wall(char c);
+
+t_ft_hash_map	*format_init(t_data *data);
+void			format_check(t_data *data, bool r, bool f);
+
+bool			is_in_wall_and_set_player(t_data *data, t_iv pos, char c);
+
+void	draw_sprite(t_data *data, t_sprite *sprite);
 
 #endif

@@ -6,12 +6,11 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 16:22:08 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/25 12:51:54 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/28 13:55:53 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-#include "map.h"
 
 static void	static_try_to_load(t_data *data, t_mlx_image **img, char *file_path)
 {

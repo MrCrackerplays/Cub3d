@@ -6,12 +6,11 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/08 14:36:06 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/28 13:56:19 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d_bonus.h>
-#include "sprite_bonus.h"
 
 static void	static_get_len_and_load_sprite(t_data *data, t_sprite *sprite)
 {

@@ -6,12 +6,11 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 17:53:15 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/24 16:36:24 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/28 13:55:56 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-#include "map.h"
 
 static void	static_test_tile(t_data *data, t_iv pos)
 {

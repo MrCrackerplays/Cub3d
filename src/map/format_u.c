@@ -6,12 +6,11 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 15:10:51 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/18 16:16:13 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/03/28 13:55:49 by pdruart       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-#include "map.h"
 
 t_ft_hash_map	*format_init(t_data *data)
 {
