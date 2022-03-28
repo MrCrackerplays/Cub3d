@@ -1,7 +1,7 @@
 # Cub3d
 A Raycaster programmed in C by [pdruart](https://github.com/MrCrackerplays) and [rdrazsky](https://github.com/LANIK2000) for the Cub3d subject of Codam as part of the 42 network.
 
-Made using [MLX42](https://github.com/W2Codam/MLX42), commit [13a181d73868fbd1ef8aee0b85c3bc0003ee4c40](https://github.com/W2Codam/MLX42/commit/13a181d73868fbd1ef8aee0b85c3bc0003ee4c40), and thus requires GLFW to be installed.
+Made using [MLX42](https://github.com/W2Codam/MLX42), commit [13a181d73868fbd1ef8aee0b85c3bc0003ee4c40](https://github.com/W2Codam/MLX42/commit/13a181d73868fbd1ef8aee0b85c3bc0003ee4c40) with a couple changes, and thus requires GLFW to be installed.
 
 ## Compiling
 On Mac and Linux run
