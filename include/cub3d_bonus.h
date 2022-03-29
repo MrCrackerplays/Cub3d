@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/28 13:55:09 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/29 14:02:00 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,57 +87,59 @@ typedef struct s_data {
 	t_fv		plane;
 }	t_data;
 
-COLOR		ml_rgba(BYTE r, BYTE g, BYTE b, BYTE a);
-COLOR		ml_rgb(BYTE r, BYTE g, BYTE b);
-BYTE		ml_color_r(COLOR rgba);
-BYTE		ml_color_g(COLOR rgba);
-BYTE		ml_color_b(COLOR rgba);
-BYTE		ml_color_a(COLOR rgba);
-COLOR		ml_color_darken(COLOR c, float darkness_mod);
+COLOR			ml_rgba(BYTE r, BYTE g, BYTE b, BYTE a);
+COLOR			ml_rgb(BYTE r, BYTE g, BYTE b);
+BYTE			ml_color_r(COLOR rgba);
+BYTE			ml_color_g(COLOR rgba);
+BYTE			ml_color_b(COLOR rgba);
+BYTE			ml_color_a(COLOR rgba);
+COLOR			ml_color_darken(COLOR c, float darkness_mod);
 
-COLOR		ml_color_at(t_mlx_image *img, UINT x, UINT y);
-void		ml_draw_pixel(t_mlx_image *img, UINT x, UINT y, COLOR color);
-void		ml_draw_pixel_s(
-				t_data *data, t_mlx_image *img, t_iv pos, COLOR color);
-void		ml_draw_box(t_mlx_image *image, t_iv pos, t_iv size, COLOR color);
-void		ml_draw_line(t_mlx_image *image, t_iv p1, t_iv p2, COLOR color);
+COLOR			ml_color_at(t_mlx_image *img, UINT x, UINT y);
+void			ml_draw_pixel(t_mlx_image *img, UINT x, UINT y, COLOR color);
+void			ml_draw_pixel_s(
+					t_data *data, t_mlx_image *img, t_iv pos, COLOR color);
+void			ml_draw_box(
+					t_mlx_image *image, t_iv pos, t_iv size, COLOR color);
+void			ml_draw_line(t_mlx_image *image, t_iv p1, t_iv p2, COLOR color);
 
-float		find_angle(t_fv p1, t_fv p2);
-char		*skip_space(char *src);
-void		test_access(char *file_path, char *message);
-t_sprite	*sprite_new(float x, float y);
-float		ray_angle_fix(t_data *data, int i);
+float			find_angle(t_fv p1, t_fv p2);
+char			*skip_space(char *src);
+void			test_access(char *file_path, char *message);
+t_sprite		*sprite_new(float x, float y);
+float			ray_angle_fix(t_data *data, int i);
 
-void		init_game(t_data *data);
+void			init_game(t_data *data);
 
-void		import_map(char *path, t_data *data);
-void		format_map(t_data *data);
-void		validate_map(t_data *data);
+void			import_map(char *path, t_data *data);
+void			format_map(t_data *data);
+void			validate_map(t_data *data);
 
-t_ray		cast_ray(t_data *data, float r_angle, t_fv pos, float mirror_len);
+t_ray			cast_ray(
+					t_data *data, float r_angle, t_fv pos, float mirror_len);
 
-t_ray		mirror_hit(
-				t_data *data, float r_angle, t_ray ray, float mirror_len);
+t_ray			mirror_hit(
+					t_data *data, float r_angle, t_ray ray, float mirror_len);
 
-void		player_collision_correction(t_data *data);
+void			player_collision_correction(t_data *data);
 
-void		player_movement_hook(void *param);
-void		ray_cast_hook(void *param);
+void			player_movement_hook(void *param);
+void			ray_cast_hook(void *param);
 
-void		minimap_hook(t_data *data);
-void		ceiling_hook(t_data *param);
-void		map_hook(t_data *data);
-void		sprite_hook(t_data *data);
+void			minimap_hook(t_data *data);
+void			ceiling_hook(t_data *param);
+void			map_hook(t_data *data);
+void			sprite_hook(t_data *data);
 
-char		map_get_at(t_ft_list *map, UINT x, UINT y);
+char			map_get_at(t_ft_list *map, UINT x, UINT y);
 
-char		is_wall(char c);
+char			is_wall(char c);
 
 t_ft_hash_map	*format_init(t_data *data);
 void			format_check(t_data *data, bool r, bool f);
 
 bool			is_in_wall_and_set_player(t_data *data, t_iv pos, char c);
 
-void	draw_sprite(t_data *data, t_sprite *sprite);
+void			draw_sprite(t_data *data, t_sprite *sprite);
 
 #endif

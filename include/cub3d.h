@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/17 15:54:34 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/28 13:55:08 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/03/29 14:00:24 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,30 +59,30 @@ typedef struct s_data {
 	t_mlx_image	*west;
 }	t_data;
 
-COLOR		ml_color_darken(COLOR c, float darkness_mod);
+COLOR			ml_color_darken(COLOR c, float darkness_mod);
 
-COLOR		ml_color_at(t_mlx_image *img, UINT x, UINT y);
-void		ml_draw_pixel(t_mlx_image *img, UINT x, UINT y, COLOR color);
+COLOR			ml_color_at(t_mlx_image *img, UINT x, UINT y);
+void			ml_draw_pixel(t_mlx_image *img, UINT x, UINT y, COLOR color);
 
-float		find_angle(t_fv p1, t_fv p2);
-char		*skip_space(char *src);
-void		test_access(char *file_path, char *message);
-float		ray_angle_fix(t_data *data, int i);
+float			find_angle(t_fv p1, t_fv p2);
+char			*skip_space(char *src);
+void			test_access(char *file_path, char *message);
+float			ray_angle_fix(t_data *data, int i);
 
-void		init_game(t_data *data);
+void			init_game(t_data *data);
 
-void		import_map(char *path, t_data *data);
-void		format_map(t_data *data);
-void		validate_map(t_data *data);
+void			import_map(char *path, t_data *data);
+void			format_map(t_data *data);
+void			validate_map(t_data *data);
 
-void		player_movement_hook(void *param);
-void		ray_cast_hook(void *param);
+void			player_movement_hook(void *param);
+void			ray_cast_hook(void *param);
 
-void		map_hook(t_data *data);
+void			map_hook(t_data *data);
 
-char		map_get_at(t_ft_list *map, UINT x, UINT y);
+char			map_get_at(t_ft_list *map, UINT x, UINT y);
 
-char		is_wall(char c);
+char			is_wall(char c);
 
 t_ft_hash_map	*format_init(t_data *data);
 void			format_check(t_data *data, bool r, bool f);
