@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/03/18 15:10:47 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/28 13:56:09 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/04/01 14:06:13 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	format_check(t_data *data, bool r, bool f)
 		|| !data->door[0] || !data->door[1] || !data->door[2]
 		|| !data->sprite[0] || !data->sprite[1] || !data->sprite[2]
 		|| !data->ceil_img || !data->floor_img)
-		ft_exit_error("Invalid map.1");
+		ft_exit_error("Invalid map.");
 }

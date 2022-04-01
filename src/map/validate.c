@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 17:53:15 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/28 13:55:56 by pdruart       ########   odam.nl         */
+/*   Updated: 2022/04/01 14:06:13 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static void	static_test_tile(t_data *data, t_iv pos)
 			|| map_get_at(data->map, pos.x, pos.y + 1) == ' '
 			|| map_get_at(data->map, pos.x - 1, pos.y) == ' '
 			|| map_get_at(data->map, pos.x, pos.y - 1) == ' ')
-			ft_exit_error("Invalid map4.");
+			ft_exit_error("Invalid map.");
 	}
 	else if (c != ' ' && c != '1')
-		ft_exit_error("Invalid map.5");
+		ft_exit_error("Invalid map.");
 }
 
 void	validate_map(t_data *data)
@@ -43,7 +43,7 @@ void	validate_map(t_data *data)
 	while (pos.y < data->map->len - 1)
 	{
 		if (((t_ft_string *)ft_list_item_at(data->map, pos.y))->text[1] == '\0')
-			ft_exit_error("Invalid map.7");
+			ft_exit_error("Invalid map.");
 		pos.x = 0;
 		while ((UINT)pos.x
 			< ((t_ft_string *)ft_list_item_at(data->map, pos.y))->len)
@@ -54,5 +54,5 @@ void	validate_map(t_data *data)
 		pos.y++;
 	}
 	if (data->player_pos.x == 0)
-		ft_exit_error("Invalid map.6");
+		ft_exit_error("Invalid map.");
 }

@@ -6,7 +6,7 @@
 /*   By: rdrazsky <rdrazsky@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/02/24 15:42:35 by rdrazsky      #+#    #+#                 */
-/*   Updated: 2022/03/22 15:38:06 by rdrazsky      ########   odam.nl         */
+/*   Updated: 2022/04/01 14:06:13 by rdrazsky      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	import_map(char *file_path, t_data *data)
 	test_access(file_path, "Can't load map.");
 	data->map = ft_file_to_list(file_path);
 	if (data->map->len < 9)
-		ft_exit_error("Invalid map.3");
+		ft_exit_error("Invalid map.");
 	static_remove_newlines(data);
 	data->north = NULL;
 	data->south = NULL;
